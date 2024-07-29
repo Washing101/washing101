@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .salary-summary {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .salary-summary h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .salary-summary p {
+            margin: 0;
+            color: #888;
+        }
+        .salary-breakdown {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .salary-breakdown div {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+        }
+        .salary-breakdown div span {
+            display: block;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        .employee-table {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .employee-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .employee-table th, .employee-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+        .employee-table th {
+            background: #f9f9f9;
+            font-weight: 600;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .search-bar input {
+            padding: 10px;
+            width: calc(100% - 150px);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .create-salary {
+            padding: 10px 20px;
+            background: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .status .dot {
+            height: 10px;
+            width: 10px;
+            background-color: green;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .status.pending .dot {
+            background-color: orange;
+        }
+        .status.rejected .dot {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="salary-summary">
+        <h1 id="average-salary">$0.00 / year</h1>
+        <p>Average Base Salary (USD)</p>
+        <div class="salary-breakdown">
+            <div><span id="base-salary-percentage">0%</span> Base Salary</div>
+            <div><span id="bonus-percentage">0%</span> Bonus</div>
+            <div><span id="profit-sharing-percentage">0%</span> Profit Sharing</div>
+            <div><span id="total-pay-percentage">0%</span> Total Pay</div>
+        </div>
+    </div>
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search for ...">
+        <button class="create-salary">+ Create Salary</button>
+    </div>
+    <div class="employee-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Joining Date</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Email Id</th>
+                    <th>Phone Number</th>
+                    <th>Salary</th>
+                    <th>Bonus</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="employee-salary-body">
+                <!-- Dynamic content will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    loadEmployeeSalary();
+    document.getElementById('search').addEventListener('input', filterEmployeeSalary);
+});
+
+function loadEmployeeSalary() {
+    google.script.run.withSuccessHandler(function(data) {
+        renderEmployeeSalary(data.employees);
+        updateSalarySummary(data.summary);
+    }).getEmployeeSalaryData();
+}
+
+function renderEmployeeSalary(employees) {
+    const tbody = document.getElementById('employee-salary-body');
+    tbody.innerHTML = '';
+    employees.forEach(employee => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${employee.id}</td>
+            <td>${employee.joiningDate}</td>
+            <td>${employee.name}</td>
+            <td>${employee.designation}</td>
+            <td>${employee.email}</td>
+            <td>${employee.phone}</td>
+            <td>${employee.salary}</td>
+            <td>${employee.bonus}</td>
+            <td><button class="generate-slip">Generate Slip</button></td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+function filterEmployeeSalary() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    google.script.run.withSuccessHandler(function(data) {
+        const filteredEmployees = data.employees.filter(employee => 
+            employee.name.toLowerCase().includes(searchTerm) ||
+            employee.designation.toLowerCase().includes(searchTerm) ||
+            employee.email.toLowerCase().includes(searchTerm)
+        );
+        renderEmployeeSalary(filteredEmployees);
+    }).getEmployeeSalaryData();
+}
+
+function updateSalarySummary(summary) {
+    document.getElementById('average-salary').textContent = `$${summary.averageSalary} / year`;
+    document.getElementById('base-salary-percentage').textContent = `${summary.baseSalaryPercentage}%`;
+    document.getElementById('bonus-percentage').textContent = `${summary.bonusPercentage}%`;
+    document.getElementById('profit-sharing-percentage').textContent = `${summary.profitSharingPercentage}%`;
+    document.getElementById('total-pay-percentage').textContent = `${summary.totalPayPercentage}%`;
+}
+    </script>
+</body>
+</html>

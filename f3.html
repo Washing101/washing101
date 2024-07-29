@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container h2 {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .feedback-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .feedback-item p {
+            margin: 0;
+        }
+        .alert {
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+            color: #8a6d3b;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .add-btn {
+            background-color: #5a2d82;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .add-btn i {
+            margin-right: 5px;
+        }
+        .add-btn:hover {
+            background-color: #6b35a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Admin Dashboard</div>
+            <div class="breadcrumb">
+                <a href="#">Dashboard</a> / Admin Dashboard
+            </div>
+        </div>
+        <div class="form-container">
+            <h2>Admin Dashboard</h2>
+            <div id="feedbackList">
+                <h3>Employee Feedback</h3>
+                <div class="feedback-item">
+                    <p><strong>Name:</strong> Alice</p>
+                    <p><strong>Department:</strong> HR</p>
+                    <p><strong>Engagement Level:</strong> 5</p>
+                    <p><strong>Workload Level:</strong> 7</p>
+                    <p><strong>Job Satisfaction Level:</strong> 6</p>
+                    <p><strong>Feedback:</strong> Workload is a bit high, but overall job is satisfying.</p>
+                    <p><strong>Submitted on:</strong> 2024-07-20</p>
+                </div>
+                <div class="feedback-item">
+                    <p><strong>Name:</strong> Anonymous</p>
+                    <p><strong>Department:</strong> Finance</p>
+                    <p><strong>Engagement Level:</strong> 3</p>
+                    <p><strong>Workload Level:</strong> 8</p>
+                    <p><strong>Job Satisfaction Level:</strong> 4</p>
+                    <p><strong>Feedback:</strong> High workload and low engagement.</p>
+                    <p><strong>Submitted on:</strong> 2024-07-20</p>
+                    <div class="alert">Employee requires attention!</div>
+                </div>
+                <div class="feedback-item">
+                    <p><strong>Name:</strong> Charlie</p>
+                    <p><strong>Department:</strong> IT</p>
+                    <p><strong>Engagement Level:</strong> 6</p>
+                    <p><strong>Workload Level:</strong> 5</p>
+                    <p><strong>Job Satisfaction Level:</strong> 7</p>
+                    <p><strong>Feedback:</strong> Pretty balanced work environment.</p>
+                    <p><strong>Submitted on:</strong> 2024-07-20</p>
+                </div>
+                <div class="feedback-item">
+                    <p><strong>Name:</strong> Anonymous</p>
+                    <p><strong>Department:</strong> Marketing</p>
+                    <p><strong>Engagement Level:</strong> 4</p>
+                    <p><strong>Workload Level:</strong> 6</p>
+                    <p><strong>Job Satisfaction Level:</strong> 5</p>
+                    <p><strong>Feedback:</strong> Could use more engagement activities.</p>
+                    <p><strong>Submitted on:</strong> 2024-07-20</p>
+                    <div class="alert">Employee requires attention!</div>
+                </div>
+                <div class="feedback-item">
+                    <p><strong>Name:</strong> Eve</p>
+                    <p><strong>Department:</strong> Sales</p>
+                    <p><strong>Engagement Level:</strong> 7</p>
+                    <p><strong>Workload Level:</strong> 4</p>
+                    <p><strong>Job Satisfaction Level:</strong> 8</p>
+                    <p><strong>Feedback:</strong> Very satisfying job and manageable workload.</p>
+                    <p><strong>Submitted on:</strong> 2024-07-20</p>
+                </div>
+            </div>
+            <div id="chatContainer">
+                <h3>Chat with HR</h3>
+                <div id="messages"></div>
+                <input type="text" id="messageInput" placeholder="Type your message...">
+                <button id="sendMessage">Send</button>
+            </div>
+            <div class="navigation">
+                <a href="f1.html" class="add-btn" onclick="openPage('f1'); return false;">
+                    <i class="fas fa-plus"></i> Employee Feedback Form
+                </a>
+                <a href="f4.html" class="add-btn" onclick="openPage('f4'); return false;">
+                    <i class="fas fa-plus"></i> Employee Survey
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', loadAdminDashboard);
+
+        function loadAdminDashboard() {
+            const messages = [
+                { sender: 'HR', text: 'Welcome! How can we help you today?' }
+            ];
+
+            function renderMessages() {
+                const messageContainer = document.getElementById('messages');
+                messageContainer.innerHTML = '';
+                messages.forEach(msg => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message ' + (msg.sender === 'HR' ? 'hr' : 'employee');
+                    messageDiv.textContent = msg.text;
+                    messageContainer.appendChild(messageDiv);
+                });
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            }
+
+            document.getElementById('sendMessage').addEventListener('click', function() {
+                const messageText = document.getElementById('messageInput').value.trim();
+                if (messageText) {
+                    messages.push({ sender: 'Employee', text: messageText });
+                    document.getElementById('messageInput').value = '';
+                    renderMessages();
+                }
+            });
+
+            renderMessages();
+        }
+    </script>
+</body>
+</html>

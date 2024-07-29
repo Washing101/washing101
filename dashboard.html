@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    .dashboard .metrics {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .dashboard .metric {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      flex: 1;
+      margin-right: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .dashboard .metric:last-child {
+      margin-right: 0;
+    }
+    .dashboard .metric h3 {
+      margin: 0;
+      color: #666;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .dashboard .metric p {
+      margin: 5px 0 0;
+      font-size: 20px;
+      color: #333;
+      font-weight: 400;
+    }
+    .dashboard .charts {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .dashboard .chart {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      flex: 1;
+      width: 25%;
+      height: 390px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-right: 20px;
+      margin-bottom: 20px;
+    }
+    .dashboard .chart:last-child {
+      margin-right: 0;
+    }
+    .dashboard .chart canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .dashboard .status-cards {
+      display: flex;
+      flex-direction: column;
+      width: 20%;
+    }
+    .dashboard .status-card {
+      background-color: #f1f1f1;
+      border-radius: 8px;
+      padding: 20px;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+    .dashboard .status-card.accepted {
+      background-color: #9b59b6;
+      color: white;
+    }
+    .dashboard .status-card.rejected {
+      background-color: #e74c3c;
+      color: white;
+    }
+    .dashboard .status-card h4 {
+      margin: 0 0 10px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .dashboard .status-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .dashboard .status-info span {
+      font-size: 20px;
+      font-weight: 400;
+    }
+    .dashboard .progress-ring {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      margin: 10px 0;
+    }
+    .dashboard .progress-ring__circle {
+      transform: rotate(-90deg);
+    }
+    .dashboard .progress-ring__circle-bg {
+      fill: none;
+      stroke: #eee;
+      stroke-width: 4;
+    }
+    .dashboard .progress-ring__circle-progress {
+      fill: none;
+      stroke: #ff9800;
+      stroke-width: 4;
+      stroke-dasharray: 175.93;
+      stroke-dashoffset: 17.59;
+    }
+    .dashboard .progress-ring span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+    }
+    .dashboard .stat {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .dashboard .recruitment-progress {
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px;
+      flex: 1;
+      margin-right: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      height: auto;
+    }
+    .dashboard .recruitment-progress table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .dashboard .recruitment-progress th, .dashboard .recruitment-progress td {
+      text-align: left;
+      padding: 5px;
+    }
+    .dashboard .recruitment-progress th {
+      background-color: #f7f7f7;
+      font-weight: 600;
+      color: #333;
+    }
+    .dashboard .recruitment-progress td {
+      background-color: white;
+    }
+    .dashboard .recruitment-progress .status {
+      display: flex;
+      align-items: center;
+    }
+    .dashboard .recruitment-progress .status span {
+      margin-left: 8px;
+    }
+    .dashboard .recruitment-progress .status .dot {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dashboard .dot-tech { background-color: orange; }
+    .dashboard .dot-resume { background-color: purple; }
+    .dashboard .dot-final { background-color: teal; }
+    .dashboard .view-all {
+      text-align: right;
+      padding: 5px;
+    }
+    .dashboard .view-all a {
+      text-decoration: none;
+      color: #4b0082;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="header">
+      <div class="title">Dashboard</div>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        <h3>Total Employees</h3>
+        <p id="totalEmployees">352</p>
+      </div>
+      <div class="metric">
+        <h3>Number of Leave</h3>
+        <p id="numberOfLeave">24</p>
+      </div>
+      <div class="metric">
+        <h3>New Employees</h3>
+        <p id="newEmployees">27</p>
+      </div>
+      <div class="metric">
+        <h3>Happiness Rate</h3>
+        <p id="happinessRate">80%</p>
+      </div>
+    </div>
+    <div class="charts">
+      <div class="chart doughnut">
+        <canvas id="workingFormatChart"></canvas>
+      </div>
+      <div class="chart project">
+        <canvas id="projectEmploymentChart"></canvas>
+      </div>
+      <div class="status-cards">
+        <div class="status-card accepted">
+          <h4>Accepted Job Application</h4>
+          <div class="progress-ring">
+            <svg class="progress-ring__circle" width="60" height="60">
+              <circle class="progress-ring__circle-bg" cx="30" cy="30" r="28" />
+              <circle class="progress-ring__circle-progress" cx="30" cy="30" r="28" />
+            </svg>
+            <span>90%</span>
+          </div>
+          <div class="stat">84 / 336</div>
+        </div>
+        <div class="status-card rejected">
+          <h4>Rejected Job Application</h4>
+          <div class="progress-ring">
+            <svg class="progress-ring__circle" width="60" height="60">
+              <circle class="progress-ring__circle-bg" cx="30" cy="30" r="28" />
+              <circle class="progress-ring__circle-progress" cx="30" cy="30" r="28" />
+            </svg>
+            <span>90%</span>
+          </div>
+          <div class="stat">172 / 336</div>
+        </div>
+      </div>
+    </div>
+    <div class="charts">
+      <div class="chart">
+        <canvas id="staffTurnoverChart"></canvas>
+      </div>
+      <div class="recruitment-progress">
+        <h3>Recruitment Progress</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Department</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody id="recruitmentTableBody">
+            <tr>
+              <td>Leo Myers</td>
+              <td>Devops</td>
+              <td>
+                <div class="status">
+                  <span class="dot dot-tech"></span>
+                  <span>Tech interview</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Ann Fields</td>
+              <td>UX/UI Designer</td>
+              <td>
+                <div class="status">
+                  <span class="dot dot-resume"></span>
+                  <span>Resume review</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Eric Olson</td>
+              <td>.Net developer</td>
+              <td>
+                <div class="status">
+                  <span class="dot dot-final"></span>
+                  <span>Final interview</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="view-all">
+          <a href="#">View all</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Call chart functions if the dashboard is loaded
+    createWorkingFormatChart();
+    createProjectEmploymentChart();
+    createStaffTurnoverChart();
+    createAcceptedChart();
+    createRejectedChart();
+  </script>
+</body>
+</html>

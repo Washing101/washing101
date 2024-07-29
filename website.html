@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        .wrapper {
+            width: 100%;
+            max-width: 1400px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            background: #fff;
+            color: #333;
+            padding: 20px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 600;
+            color: #4e44ce;
+        }
+        .header .add-project button {
+            background: #4e44ce;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        .header .add-project button:hover {
+            background: #3d34aa;
+        }
+        .project-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            flex: 1 1 calc(50% - 10px);
+            margin: 10px 0;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            color: #4e44ce;
+        }
+        .card h3 span {
+            background: #4e44ce;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .card p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 1em;
+        }
+        .progress {
+            background: #eee;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 14px;
+            margin-top: 10px;
+            position: relative;
+        }
+        .progress-bar {
+            height: 14px;
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .low {
+            background: #4caf50;
+        }
+        .medium {
+            background: #ff9800;
+        }
+        .high {
+            background: #f44336;
+        }
+        .progress-text {
+            position: absolute;
+            right: 10px;
+            top: -25px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        .info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .info p {
+            margin: 0;
+            font-size: 1em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Website Details</h1>
+            
+        </div>
+        <div class="project-container">
+            <div class="card" onclick="openPage('erp'); return false;">
+                 <div class="details">
+            <p><strong>Status:</strong> Running</p>
+            <p><strong>Open Tasks:</strong> 20</p>
+            <p><strong>Description:</strong> We are currently redesigning the company website to improve user experience and update the visual design.</p>
+            <p><strong>Created:</strong> Feb 15, 2021</p>
+            <p><strong>Team Leader:</strong> Sarah Johnson</p>
+            <p><strong>Priority:</strong> Low</p>
+            <p><strong>Deadline:</strong> Jun 30, 2021</p>
+            <p><strong>Comments:</strong> 15</p>
+            <p><strong>Bug:</strong> 3</p>
+            <p><strong>Progress:</strong> 45%</p>
+        </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openPage(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

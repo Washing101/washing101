@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    .app-review-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      background-color: #f4f4f9;
+      min-height: 100vh;
+      position: relative; /* Added for sidebar positioning */
+    }
+    .app-review-container {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+    }
+    .app-review-header-container {
+      padding: 20px;
+      width: calc(100% - 220px); /* Adjusting width considering sidebar */
+    }
+    .app-review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .app-review-header h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .app-review-header .app-review-status {
+      font-size: 14px;
+      color: #888;
+    }
+    .app-review-content {
+      overflow-y: auto;
+      height: calc(100vh - 60px); /* Adjusting height to make the content scrollable */
+      padding-right: 20px;
+    }
+    .app-review-resume-section img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .app-review-sidebar {
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+      height: calc(100vh - 40px); /* Adjusting height considering padding */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      background-color: #ffffff;
+    }
+    .app-review-sidebar .app-review-sidebar-section {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .app-review-sidebar .app-review-sidebar-section h3 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+    }
+    .app-review-sidebar .app-review-sidebar-section p {
+      margin: 5px 0;
+      font-size: 12px;
+      color: #777;
+    }
+    .app-review-button {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+    .app-review-advance-button {
+      background-color: #00aaff;
+    }
+    .app-review-advance-button:hover {
+      background-color: #0099dd;
+    }
+    .app-review-skip-button {
+      background-color: #ffc107;
+    }
+    .app-review-skip-button:hover {
+      background-color: #ffb300;
+    }
+    .app-review-reject-button {
+      background-color: #f44336;
+    }
+    .app-review-reject-button:hover {
+      background-color: #e53935;
+    }
+    .app-review-feedback-button {
+      background-color: #dddddd;
+      color: #555;
+    }
+    .app-review-feedback-button:hover {
+      background-color: #cccccc;
+    }
+    .feedback-sidebar {
+      position: fixed;
+      right: -500px; /* Start off-screen */
+      top: 0;
+      width: 400px;
+      height: 100%;
+      background-color: #fff;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+    .feedback-sidebar.active {
+      right: 0; /* Slide in */
+    }
+    .feedback-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .feedback-header h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .feedback-header button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .feedback-content textarea {
+      width: 100%;
+      height: 200px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      resize: none;
+    }
+    .feedback-submit {
+      background-color: #4e73df;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-align: center;
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .feedback-submit:hover {
+      background-color: #3a5bb0;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-review-wrapper">
+    <div class="app-review-container">
+      <div class="app-review-header-container">
+        <div class="app-review-header">
+          <div>
+            <h2>Jane Doe</h2>
+            <div class="app-review-status">Junior Architect</div>
+          </div>
+          <div>
+            <div>Imported From: <strong>Recruiters</strong></div>
+            <div>Applied: <strong>Mar 8, 2024</strong></div>
+          </div>
+        </div>
+        <div class="app-review-content">
+          <div class="app-review-resume-section">
+            <img src="https://th.bing.com/th/id/OIP.MIqqUpdKHp9eH92Rw2AIqwHaKe?rs=1&pid=ImgDetMain" alt="Resume">
+          </div>
+        </div>
+      </div>
+      <div class="app-review-sidebar">
+        <div class="app-review-sidebar-section">
+          <h3>Applications</h3>
+          <p>1 of 4</p>
+        </div>
+        <div class="app-review-sidebar-section">
+          <h3>Est. time left</h3>
+          <p>5 mins</p>
+        </div>
+        <button class="app-review-button app-review-advance-button" onclick="handleReview('approved')">Advance</button>
+        <button class="app-review-button app-review-skip-button" onclick="handleReview('skipped')">Skip</button>
+        <button class="app-review-button app-review-reject-button" onclick="handleReview('disapproved')">Reject</button>
+        <button class="app-review-button app-review-feedback-button" onclick="toggleFeedbackSidebar()">Leave Feedback</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Sidebar -->
+  <div id="feedbackSidebar" class="feedback-sidebar">
+    <div class="feedback-header">
+      <h2>Leave Feedback</h2>
+      <button onclick="toggleFeedbackSidebar()">&times;</button>
+    </div>
+    <div class="feedback-content">
+      <textarea placeholder="Enter your feedback here..."></textarea>
+    </div>
+    <button class="feedback-submit" onclick="submitFeedback()">Submit</button>
+  </div>
+
+  <script>
+
+    function handleReview(status) {
+      console.log('Handling review status:', status);
+      // Logic to handle the review status
+    }
+  </script>
+</body>
+</html>

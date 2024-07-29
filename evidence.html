@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Evidence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container h2 {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-group label {
+            width: 30%;
+            font-weight: bold;
+        }
+        .form-group select, .form-group input, .form-group textarea {
+            width: 65%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+        }
+        .btn-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+        .btn-apply {
+            background-color: #5a2d82;
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #f44336;
+            color: white;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .navigation {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .add-btn {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #4e73df;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .add-btn i {
+            margin-right: 8px;
+        }
+        .add-btn:hover {
+            background-color: #3a5bb0;
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        function openPage(pageName) {
+            window.location.href = pageName + '.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Performance Evidence</div>
+            <div class="breadcrumb">
+                <a href="#">Dashboard</a> / Performance Evidence
+            </div>
+        </div>
+        <div class="form-container">
+            <h2>Evidence</h2>
+            <div class="form-group">
+                <label>Project Reports:</label>
+                <img src="https://images.sampletemplates.com/wp-content/uploads/2017/02/24111100/Project-Progress-Report-example.jpg" alt="Project Report">
+            </div>
+            <div class="form-group">
+                <label>User Feedback:</label>
+                <img src="https://th.bing.com/th/id/OIP.rpVOzn8bDfSyGedX60uxagHaHS?rs=1&pid=ImgDetMain" alt="User Feedback">
+            </div>
+            <div class="form-group">
+                <label>System Uptime Reports:</label>
+                <img src="https://docs.uptimesoftware.com/download/attachments/2884247/ServerUptimeReport.png?version=1&modificationDate=1396980091000&api=v2" alt="System Uptime">
+            </div>
+            <div class="navigation">
+                <a href="#" class="add-btn" onclick="openPage('Performance'); return false;">
+                    <i class="fas fa-arrow-left"></i> Back to Overview
+                </a>
+                <a href="#" class="add-btn" onclick="openPage('detailed-metrics'); return false;">
+                    <i class="fas fa-chart-line"></i> View Detailed Metrics
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

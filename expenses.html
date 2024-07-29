@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expenses - HRM Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .expenses-container {
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 20px;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .filters input, .filters select {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .filters button {
+      padding: 10px 20px;
+      background-color: #27AE60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table thead {
+      background: #f7f7f7;
+    }
+    table th, table td {
+      padding: 15px;
+      text-align: left;
+    }
+    table th {
+      font-weight: 600;
+      font-size: 14px;
+      color: #333;
+    }
+    table tbody tr {
+      border-bottom: 1px solid #eee;
+      transition: background 0.3s;
+    }
+    table tbody tr:hover {
+      background: #f7f7f7;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+    }
+    .status .dot {
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      background: #28a745;
+      margin-right: 5px;
+    }
+    .status .dot.pending {
+      background: orange;
+    }
+    .status .dot.approved {
+      background: green;
+    }
+    .status .dot.rejected {
+      background: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="expenses-container">
+    <div class="filters">
+      <input type="text" id="item-name" placeholder="Item Name">
+      <select id="purchased-by">
+        <option value="">-- Select --</option>
+        <!-- Options will be populated by JavaScript -->
+      </select>
+      <select id="paid-by">
+        <option value="">-- Select --</option>
+        <!-- Options will be populated by JavaScript -->
+      </select>
+      <input type="date" id="from-date" placeholder="From">
+      <input type="date" id="to-date" placeholder="To">
+      <button onclick="filterExpenses()">Search</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Purchase From</th>
+          <th>Purchase Date</th>
+          <th>Purchased By</th>
+          <th>Amount</th>
+          <th>Paid By</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="expense-table-body">
+        <!-- Data will be populated here by JavaScript -->
+      </tbody>
+    </table>
+  </div>
+  <script>
+    const expenses = [
+      { item: 'HP Printer', from: 'Best Buy', date: '2021-03-15', by: 'Alice Johnson', amount: '$250', paidBy: 'Credit Card', status: 'Pending' },
+      { item: 'Office Chair', from: 'IKEA', date: '2021-04-22', by: 'Bob Smith', amount: '$150', paidBy: 'PayPal', status: 'Approved' },
+      { item: 'Monitor', from: 'Newegg', date: '2021-05-10', by: 'Charlie Brown', amount: '$300', paidBy: 'Bank Transfer', status: 'Rejected' },
+      { item: 'Desk', from: 'Amazon', date: '2021-06-05', by: 'Diana Prince', amount: '$200', paidBy: 'Debit Card', status: 'Approved' },
+      { item: 'Keyboard', from: 'Walmart', date: '2021-07-12', by: 'Evan Davis', amount: '$80', paidBy: 'Cash', status: 'Pending' },
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderExpenses(expenses);
+      populateFilters();
+    });
+
+    function renderExpenses(expenses) {
+      const tbody = document.getElementById('expense-table-body');
+      tbody.innerHTML = '';
+      expenses.forEach(expense => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${expense.item}</td>
+          <td>${expense.from}</td>
+          <td>${expense.date}</td>
+          <td>${expense.by}</td>
+          <td>${expense.amount}</td>
+          <td>${expense.paidBy}</td>
+          <td>
+            <div class="status">
+              <span class="dot ${expense.status.toLowerCase()}"></span>
+              ${expense.status}
+            </div>
+          </td>
+          <td>...</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function populateFilters() {
+      const purchasedBy = document.getElementById('purchased-by');
+      const paidBy = document.getElementById('paid-by');
+
+      const uniquePurchasedBy = [...new Set(expenses.map(expense => expense.by))];
+      const uniquePaidBy = [...new Set(expenses.map(expense => expense.paidBy))];
+
+      uniquePurchasedBy.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        purchasedBy.appendChild(option);
+      });
+
+      uniquePaidBy.forEach(method => {
+        const option = document.createElement('option');
+        option.value = method;
+        option.textContent = method;
+        paidBy.appendChild(option);
+      });
+    }
+
+    function filterExpenses() {
+      const itemName = document.getElementById('item-name').value.toLowerCase();
+      const purchasedBy = document.getElementById('purchased-by').value;
+      const paidBy = document.getElementById('paid-by').value;
+      const fromDate = document.getElementById('from-date').value;
+      const toDate = document.getElementById('to-date').value;
+
+      const filteredExpenses = expenses.filter(expense => {
+        const itemCondition = !itemName || expense.item.toLowerCase().includes(itemName);
+        const purchasedByCondition = !purchasedBy || expense.by === purchasedBy;
+        const paidByCondition = !paidBy || expense.paidBy === paidBy;
+        const dateCondition = (!fromDate || new Date(expense.date) >= new Date(fromDate)) &&
+                              (!toDate || new Date(expense.date) <= new Date(toDate));
+
+        return itemCondition && purchasedByCondition && paidByCondition && dateCondition;
+      });
+
+      renderExpenses(filteredExpenses);
+    }
+  </script>
+</body>
+</html>

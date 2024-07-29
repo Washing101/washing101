@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Leave (HR)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-container .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        .form-container label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-container input, .form-container select, .form-container textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .form-container input:read-only, .form-container select:read-only {
+            background-color: #f9f9f9;
+        }
+        .form-container .form-section {
+            width: 48%;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .form-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .form-actions .reset-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .form-actions .add-btn {
+            background-color: #5a2d82;
+            color: white;
+        }
+        .leave-info {
+            width: 20%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .leave-info h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .leave-info p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Add Leave (HR)</div>
+            <div class="breadcrumb">
+                <a href="#">Leaves Manage</a> / Add Leave (HR)
+            </div>
+        </div>
+        <div class="form-container">
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="employee">Employee</label>
+                    <select id="employee" required>
+                        <option value="">Select Employee</option>
+                        <option value="John Smith">John Smith</option>
+                        <option value="Maryam Amiri">Maryam Amiri</option>
+                        <option value="Frank Camly">Frank Camly</option>
+                        <option value="Gary Camara">Gary Camara</option>
+                        <option value="Fidel Tonn">Fidel Tonn</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="employee-id">Employee ID</label>
+                    <input type="number" id="employee-id" required>
+                </div>
+                <div class="form-group">
+                    <label for="leave-type">Leave Type</label>
+                    <select id="leave-type" required>
+                        <option value="">Select Leave Type</option>
+                        <option value="emergency">Emergency Leave</option>
+                        <option value="casual">Casual Leave</option>
+                        <option value="sick">Sick Leave</option>
+                        <option value="medical">Medical Leave</option>
+                        <option value="annual">Annual Leave</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="from-date">From</label>
+                    <input type="date" id="from-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="to-date">To</label>
+                    <input type="date" id="to-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="days-leave">Number of Days</label>
+                    <input type="number" id="days-leave" required>
+                </div>
+                <div class="form-group">
+                    <label for="leave-day">Leave Day</label>
+                    <select id="leave-day" required>
+                        <option value="">Select Leave Day</option>
+                        <option value="half">Half Day</option>
+                        <option value="full">Full Day</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reason">Reason</label>
+                    <textarea id="reason" rows="4" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button class="reset-btn" type="reset">Reset</button>
+                    <button class="add-btn" type="submit">Add Leave</button>
+                </div>
+            </div>
+            <div class="leave-info">
+                <h3>Leave Information (2024)</h3>
+                <p>Medical Leave: 04</p>
+                <p>Casual Leave: 08</p>
+                <p>Sick Leave: 03</p>
+                <p>Annual Leave: 12</p>
+                <p>Use Leave: 09</p>
+                <p>Remaining Leave: 18</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

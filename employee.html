@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employees - HRM Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+    }
+    .breadcrumb-container {
+      padding: 20px;
+      background-color: white;
+      border-bottom: 1px solid #ccc;
+    }
+    .breadcrumb-container .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .breadcrumb-container .breadcrumb {
+      color: #666;
+    }
+    .breadcrumb-container .breadcrumb a {
+      color: #666;
+      text-decoration: none;
+    }
+    .breadcrumb-container .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .table-container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-top: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .add-btn {
+      align-self: flex-end;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .add-btn i {
+      margin-right: 5px;
+    }
+    .add-btn:hover {
+      background-color: #0056b3;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table thead {
+      background: #f7f7f7;
+    }
+    table th, table td {
+      padding: 15px;
+      text-align: left;
+    }
+    table th {
+      font-weight: 600;
+      font-size: 14px;
+      color: #333;
+    }
+    table tbody tr {
+      border-bottom: 1px solid #eee;
+      transition: background 0.3s;
+    }
+    table tbody tr:hover {
+      background: #f7f7f7;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+    }
+    .status .dot {
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      background: #28a745;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <div class="breadcrumb-container">
+      <div class="title">Employees</div>
+      <div class="breadcrumb">
+        <a href="#">Dashboard</a> / Employees
+      </div>
+    </div>
+    <div class="table-container">
+      <a href="#" class="add-btn" onclick="openPage('CreateEmployeeForm'); return false;">
+        <i class="fas fa-plus"></i> Add Employee (HR)
+      </a>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Emp ID</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Position</th>
+            <th>Team</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Ahmad Faizal</div>
+            </td>
+            <td>45</td>
+            <td>30</td>
+            <td>ahmad.faizal@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Web Developer</td>
+            <td>Development</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Nurul Izzah</div>
+            </td>
+            <td>52</td>
+            <td>25</td>
+            <td>nurul.izzah@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Digital Marketing</td>
+            <td>Marketing</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Mohd Hafiz</div>
+            </td>
+            <td>36</td>
+            <td>30</td>
+            <td>mohd.hafiz@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Developer</td>
+            <td>IT</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Aishah Azman</div>
+            </td>
+            <td>96</td>
+            <td>26</td>
+            <td>aishah.azman@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Web Developer</td>
+            <td>Development</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Zulkifli Hassan</div>
+            </td>
+            <td>23</td>
+            <td>27</td>
+            <td>zulkifli.hassan@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Graphic Designer</td>
+            <td>Design</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Siti Aminah</div>
+            </td>
+            <td>45</td>
+            <td>30</td>
+            <td>siti.aminah@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>HR Specialist</td>
+            <td>Human Resources</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> David Lee</div>
+            </td>
+            <td>52</td>
+            <td>25</td>
+            <td>david.lee@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Sales Representative</td>
+            <td>Sales</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Laura Clark</div>
+            </td>
+            <td>36</td>
+            <td>30</td>
+            <td>laura.clark@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Marketing Specialist</td>
+            <td>Marketing</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> James Martinez</div>
+            </td>
+            <td>96</td>
+            <td>26</td>
+            <td>james.martinez@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>System Analyst</td>
+            <td>IT</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Sophia Rodriguez</div>
+            </td>
+            <td>23</td>
+            <td>27</td>
+            <td>sophia.rodriguez@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Content Writer</td>
+            <td>Creative</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Daniel Garcia</div>
+            </td>
+            <td>45</td>
+            <td>30</td>
+            <td>daniel.garcia@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Recruiter</td>
+            <td>Human Resources</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Olivia Anderson</div>
+            </td>
+            <td>52</td>
+            <td>25</td>
+            <td>olivia.anderson@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Financial Analyst</td>
+            <td>Finance</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Matthew Hernandez</div>
+            </td>
+            <td>36</td>
+            <td>30</td>
+            <td>matthew.hernandez@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Sales Manager</td>
+            <td>Sales</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Ava Martinez</div>
+            </td>
+            <td>96</td>
+            <td>26</td>
+            <td>ava.martinez@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Marketing Coordinator</td>
+            <td>Marketing</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Alexander Thompson</div>
+            </td>
+            <td>23</td>
+            <td>27</td>
+            <td>alexander.thompson@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Network Engineer</td>
+            <td>IT</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Charlotte White</div>
+            </td>
+            <td>45</td>
+            <td>30</td>
+            <td>charlotte.white@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Graphic Designer</td>
+            <td>Creative</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Christopher Harris</div>
+            </td>
+            <td>52</td>
+            <td>25</td>
+            <td>christopher.harris@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>HR Manager</td>
+            <td>Human Resources</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Amelia Lewis</div>
+            </td>
+            <td>36</td>
+            <td>30</td>
+            <td>amelia.lewis@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Budget Analyst</td>
+            <td>Finance</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Joshua Young</div>
+            </td>
+            <td>96</td>
+            <td>26</td>
+            <td>joshua.young@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Sales Associate</td>
+            <td>Sales</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="status"><span class="dot"></span> Mia King</div>
+            </td>
+            <td>23</td>
+            <td>27</td>
+            <td>mia.king@mail.system101.my</td>
+            <td>9874563210</td>
+            <td>Digital Marketer</td>
+            <td>Marketing</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    function openPage(pageName) {
+      console.log("Opening page:", pageName);
+      if (!pageName) {
+        console.error("pageName is undefined");
+        return;
+      }
+      google.script.run.withSuccessHandler(function(html) {
+        console.log("Page content loaded:", html);
+        document.getElementById('content').innerHTML = html;
+      }).withFailureHandler(function(error) {
+        console.error("Error loading page content:", error);
+      }).getPageContent(pageName);
+    }
+  </script>
+</body>
+</html>

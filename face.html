@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face-to-Face Interview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Your existing CSS */
+    .face-review-page {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .face-review-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      background-color: #ffffff;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .face-review-header h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .face-review-main-content {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .face-review-questionnaire {
+      margin-bottom: 20px;
+    }
+
+    .face-review-candidates-table-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .face-review-candidates-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .face-review-candidates-table th, .face-review-candidates-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .face-review-candidates-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    .face-review-custom-checkbox {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .face-review-custom-checkbox input[type="checkbox"] {
+      opacity: 0;
+      position: absolute;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .face-review-checkmark {
+      width: 18px;
+      height: 18px;
+      background-color: #f2f2f2;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 8px;
+      position: relative;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .face-review-custom-checkbox input:checked ~ .face-review-checkmark {
+      background-color: #4e73df;
+      border-color: #4e73df;
+    }
+
+    .face-review-checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 6px;
+      top: 2px;
+      width: 4px;
+      height: 8px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .face-review-custom-checkbox input:checked ~ .face-review-checkmark:after {
+      display: block;
+    }
+
+    .face-review-status-select {
+      width: 100px;
+      padding: 5px;
+    }
+
+    .face-review-send-email-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      background-color: #4e73df;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .face-review-send-email-button:hover {
+      background-color: #3a5bb0;
+    }
+
+    .face-review-send-email-button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+
+    .face-review-sidebar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background-color: #fff;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .face-review-sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .face-review-sidebar input, .face-review-sidebar textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .face-review-sidebar button {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      background-color: #4e73df;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .face-review-sidebar button:hover {
+      background-color: #3a5bb0;
+    }
+
+    .face-review-sidebar-close {
+      align-self: flex-end;
+      font-size: 18px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="face-review-page">
+    <div class="face-review-header">
+      <h1>Preliminary Phone Screen</h1>
+    </div>
+    <div class="face-review-main-content">
+      <div class="face-review-questionnaire">
+        <h2>Preliminary Phone Screen Questionnaires</h2>
+        <input type="file" id="questionnaireFile" name="questionnaireFile">
+      </div>
+    </div>
+    <div class="face-review-main-content">
+      <h2>Candidates</h2>
+      <div class="face-review-candidates-table-container">
+        <table class="face-review-candidates-table">
+          <thead>
+            <tr>
+              <th>
+                <label class="face-review-custom-checkbox">
+                  <input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAll(this)">
+                  <span class="face-review-checkmark"></span>
+                </label>
+              </th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="candidates-list">
+            <!-- Candidate items will be dynamically loaded here -->
+          </tbody>
+        </table>
+        <button class="face-review-send-email-button" onclick="showSidebar()" id="sendEmailButton">Send Email</button>
+      </div>
+    </div>
+  </div>
+  <div class="face-review-sidebar" id="sidebar">
+    <div class="face-review-sidebar-close" onclick="hideSidebar()">×</div>
+    <h2>Meeting Details</h2>
+    <input type="date" id="meetingDate" placeholder="Meeting Date">
+    <input type="time" id="meetingStartTime" placeholder="Start Time">
+    <input type="time" id="meetingEndTime" placeholder="End Time">
+    <input type="text" id="meetingLocation" placeholder="Meeting Location">
+    <textarea id="meetingDescription" placeholder="Meeting Description"></textarea>
+    <button onclick="confirmMeetingDetails()">Confirm</button>
+  </div>
+  <script>
+    // Your existing JavaScript functions and the updated confirmMeetingDetails function
+  </script>
+</body>
+</html>

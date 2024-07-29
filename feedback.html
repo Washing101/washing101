@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Feedback</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container h2 {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-group label {
+            width: 30%;
+            font-weight: bold;
+        }
+        .form-group select, .form-group input, .form-group textarea {
+            width: 65%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+        }
+        .btn-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+        .btn-apply {
+            background-color: #5a2d82;
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #f44336;
+            color: white;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .navigation {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .add-btn {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #4e73df;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .add-btn i {
+            margin-right: 8px;
+        }
+        .add-btn:hover {
+            background-color: #3a5bb0;
+            transform: scale(1.05);
+        }
+        .table-container {
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        table th {
+            background-color: #f9f9f9;
+            font-weight: 600;
+        }
+    </style>
+    <script>
+        function openPage(pageName) {
+            window.location.href = pageName + '.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Detailed Feedback</div>
+            <div class="breadcrumb">
+                <a href="#">Dashboard</a> / Feedback
+            </div>
+        </div>
+        <div class="form-container">
+            <h2>Feedback</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Area</th>
+                            <th>Comments</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Project Management</td>
+                            <td>John has consistently delivered high-quality IT projects on time and within budget, demonstrating excellent project management skills.</td>
+                            <td>9/10</td>
+                        </tr>
+                        <tr>
+                            <td>Technical Expertise</td>
+                            <td>John has shown exceptional technical expertise, resolving complex issues quickly and effectively.</td>
+                            <td>9/10</td>
+                        </tr>
+                        <tr>
+                            <td>User Support</td>
+                            <td>John has maintained a high level of user satisfaction, providing prompt and effective support to all users.</td>
+                            <td>9.5/10</td>
+                        </tr>
+                        <tr>
+                            <td>Innovation</td>
+                            <td>John has introduced several innovative solutions that have significantly improved system performance and efficiency.</td>
+                            <td>8.5/10</td>
+                        </tr>
+                        <tr>
+                            <td>Reliability</td>
+                            <td>John is highly reliable, consistently meeting deadlines and maintaining system uptime.</td>
+                            <td>9/10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Area</th>
+                            <th>Comments</th>
+                            <th>Self-Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Project Management</td>
+                            <td>I have successfully managed several IT projects, ensuring timely delivery and high quality.</td>
+                            <td>9/10</td>
+                        </tr>
+                        <tr>
+                            <td>Technical Expertise</td>
+                            <td>I have leveraged my technical expertise to resolve complex issues and implement effective solutions.</td>
+                            <td>9/10</td>
+                        </tr>
+                        <tr>
+                            <td>User Support</td>
+                            <td>I have received positive feedback from users, reflecting my commitment to providing excellent support.</td>
+                            <td>9.5/10</td>
+                        </tr>
+                        <tr>
+                            <td>Innovation</td>
+                            <td>I have introduced new solutions that have improved system performance and efficiency.</td>
+                            <td>8/10</td>
+                        </tr>
+                        <tr>
+                            <td>Reliability</td>
+                            <td>I am dependable and consistently meet deadlines, maintaining system uptime.</td>
+                            <td>9/10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Goal</th>
+                            <th>Details</th>
+                            <th>Target Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Enhance Cybersecurity Skills</td>
+                            <td>Enroll in advanced cybersecurity courses and apply new techniques to enhance system security.</td>
+                            <td>End of Q3 2024</td>
+                        </tr>
+                        <tr>
+                            <td>Mentor Junior IT Staff</td>
+                            <td>Develop a mentorship program to support the growth and development of junior IT staff.</td>
+                            <td>Ongoing</td>
+                        </tr>
+                        <tr>
+                            <td>Increase System Uptime</td>
+                            <td>Implement new monitoring and maintenance strategies to achieve 100% system uptime.</td>
+                            <td>End of Q4 2024</td>
+                        </tr>
+                        <tr>
+                            <td>Improve User Satisfaction</td>
+                            <td>Introduce new support channels and personalized follow-ups to enhance user satisfaction rates.</td>
+                            <td>End of Q2 2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="navigation">
+                <a href="#" class="add-btn" onclick="openPage('Performance'); return false;">
+                    <i class="fas fa-arrow-left"></i> Back to Overview
+                </a>
+                <a href="#" class="add-btn" onclick="openPage('detailed-metrics'); return false;">
+                    <i class="fas fa-chart-line"></i> View Detailed Metrics
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

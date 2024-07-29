@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Posts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Include the CSS here */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .form-container {
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color: white;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-top: 5px;
+    }
+    .form-group textarea {
+      height: 100px;
+    }
+    .form-group select[multiple] {
+      height: auto;
+      min-height: 100px; /* Increase the height for better visibility */
+    }
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      padding-left: 10px;
+    }
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: 400;
+    }
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Job Posts</h1>
+    <div class="form-group">
+      <label for="postingOptions">Internal and External Posting Options</label>
+      <select id="postingOptions" name="postingOptions" onchange="updateJobBoards()">
+        <option value="">Select an option</option>
+        <option value="internal">Internal</option>
+        <option value="external">External</option>
+        <option value="both">Both</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="jobBoards">Job Boards and Platforms for Posting</label>
+      <div id="jobBoards" class="checkbox-group">
+        <!-- Checkboxes will be populated based on selection -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="applicationDeadlines">Application Deadlines</label>
+      <input type="date" id="applicationDeadlines" name="applicationDeadlines">
+    </div>
+    <div class="form-group">
+      <label for="postingDate">Posting Date</label>
+      <input type="date" id="postingDate" name="postingDate">
+    </div>
+    <div class="form-group">
+      <label for="expiryDate">Expiry Date</label>
+      <input type="date" id="expiryDate" name="expiryDate">
+    </div>
+    <button type="button" class="submit-btn" onclick="openJobInfoPage('scorecard'); return false;">Next</button>
+  </div>
+  <script>
+    
+  </script>
+</body>
+</html>

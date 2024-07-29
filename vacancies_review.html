@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vacancies Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    .vacancies-review-page {
+      width: 100%;
+      height: 100%;
+    }
+
+    .vacancies-review-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      background-color: #ffffff;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .vacancies-review-header h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .vacancies-review-main-content {
+      display: flex;
+      flex-grow: 1;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .vacancies-review-left-content {
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    .vacancies-review-stats-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    .vacancies-review-stat {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+      width: calc(25% - 10px);
+      margin: 0;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .vacancies-review-stat:hover {
+      background-color: #e0e0e0;
+      transform: scale(1.05);
+    }
+
+    .vacancies-review-stat h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #6a11cb;
+    }
+
+    .vacancies-review-stat p {
+      margin: 0;
+      font-size: 14px;
+      color: #888;
+      text-align: center;
+    }
+
+    .vacancies-review-progress-circle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f0;
+      color: #6a11cb;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="vacancies-review-wrapper">
+    <div class="vacancies-review-page">
+      <div class="vacancies-review-header">
+        <h1>Choose Job Vacancy</h1>
+      </div>
+      <div class="vacancies-review-main-content">
+        <div class="vacancies-review-left-content">
+          <div id="vacancies-review-container" class="vacancies-review-stats-container">
+            <!-- Vacancies with progress 30 will be dynamically loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  </script>
+</body>
+</html>

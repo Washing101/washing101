@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Survey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container h2 {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-group label {
+            width: 30%;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group select, .form-group input, .form-group textarea {
+            width: 65%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+        }
+        .btn-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-apply {
+            background-color: #5a2d82;
+            color: white;
+        }
+        .btn-apply:hover {
+            background-color: #6b35a3;
+        }
+        .btn-cancel {
+            background-color: #f44336;
+            color: white;
+        }
+        .btn-cancel:hover {
+            background-color: #d32f2f;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .add-btn {
+            background-color: #5a2d82;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .add-btn i {
+            margin-right: 5px;
+        }
+        .add-btn:hover {
+            background-color: #6b35a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Employee Survey</div>
+            <div class="breadcrumb">
+                <a href="#">Dashboard</a> / Employee Survey
+            </div>
+        </div>
+        <div class="form-container">
+            <h2>Employee Survey</h2>
+            <div class="error-message" id="error-message">Please fill in all required fields.</div>
+            <form id="surveyForm">
+                <div class="form-group">
+                    <label for="surveyQuestion1">How satisfied are you with your job?</label>
+                    <select id="surveyQuestion1" name="surveyQuestion1" required>
+                        <option value="">Select an option</option>
+                        <option value="1">1 - Very Dissatisfied</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5 - Neutral</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10 - Very Satisfied</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="surveyQuestion2">Do you feel valued at work?</label>
+                    <select id="surveyQuestion2" name="surveyQuestion2" required>
+                        <option value="">Select an option</option>
+                        <option value="1">1 - Not at all</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5 - Neutral</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10 - Very much</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="surveyQuestion3">Would you recommend this company to a friend?</label>
+                    <select id="surveyQuestion3" name="surveyQuestion3" required>
+                        <option value="">Select an option</option>
+                        <option value="1">1 - Definitely Not</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5 - Neutral</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10 - Definitely Yes</option>
+                    </select>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn-apply">Submit Survey</button>
+                    <button type="button" class="btn-cancel">Cancel</button>
+                </div>
+            </form>
+            <div class="navigation">
+                <a href="f1.html" class="add-btn" onclick="openPage('f1'); return false;">
+                    <i class="fas fa-plus"></i> Employee Feedback Form
+                </a>
+                <a href="f2.html" class="add-btn" onclick="openPage('f2'); return false;">
+                    <i class="fas fa-plus"></i> Feedback History
+                </a>
+                <a href="f3.html" class="add-btn" onclick="openPage('f3'); return false;">
+                    <i class="fas fa-plus"></i> Admin Dashboard
+                </a>
+                <a href="f5.html" class="add-btn" onclick="openPage('f5'); return false;">
+                    <i class="fas fa-plus"></i> Analysis and Insights
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', initializeForm);
+
+        function initializeForm() {
+            // Sample data to simulate form submissions
+            const sampleSurvey = [
+                { surveyQuestion1: 6, surveyQuestion2: 7, surveyQuestion3: 8, timestamp: new Date().toLocaleString() },
+                { surveyQuestion1: 4, surveyQuestion2: 5, surveyQuestion3: 6, timestamp: new Date().toLocaleString() },
+                { surveyQuestion1: 8, surveyQuestion2: 8, surveyQuestion3: 9, timestamp: new Date().toLocaleString() },
+                { surveyQuestion1: 5, surveyQuestion2: 6, surveyQuestion3: 7, timestamp: new Date().toLocaleString() },
+                { surveyQuestion1: 7, surveyQuestion2: 7, surveyQuestion3: 8, timestamp: new Date().toLocaleString() }
+            ];
+
+            localStorage.setItem('surveyResults', JSON.stringify(sampleSurvey));
+        }
+    </script>
+</body>
+</html>

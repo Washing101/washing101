@@ -1,0 +1,1783 @@
+<script>
+function openPage(pageName, id = null) {
+  console.log("Opening page:", pageName);
+  if (!pageName) {
+    console.error("pageName is undefined");
+    return;
+  }
+
+  google.script.run.withSuccessHandler(function(html) {
+    console.log("Page content loaded:", html);
+    document.getElementById('content').innerHTML = html;
+
+    switch (pageName) {
+      case 'dashboard':
+        createWorkingFormatChart();
+        createProjectEmploymentChart();
+        createStaffTurnoverChart();
+        createAcceptedChart();
+        createRejectedChart();
+        break;
+      case 'employee':
+        console.log("Employee page loaded");
+        break;
+      case 'profile':
+        console.log("Profile page loaded");
+        break;
+      case 'vacancies':
+        console.log("Vacancies page loaded");
+        loadVacancies();
+        break;
+      case 'candidates':
+        console.log("Candidates page loaded");
+        loadCandidates();
+        addSearchEventListener();
+        break;
+      case 'expenses':
+        console.log("Expenses page loaded");
+        loadExpenses();
+        break;
+      case 'employeeSalary':
+        console.log("Employee Salary page loaded");
+        loadEmployeeSalary();
+        break;
+      case 'department':
+        console.log("Department page loaded");
+        break;
+      case 'abclist':
+        console.log("Abclist page loaded");
+        break;
+      case 'EmpAddLeave':
+        console.log("EmpAddLeave page loaded");
+        break;
+      case 'HRabclist':
+        console.log("HRabclist page loaded");
+        break;
+      case 'HRAddLeave':
+        console.log("HRAddLeave page loaded");
+        break;
+      case 'AttendanceEmployee':
+        console.log("AttendanceEmployee page loaded");
+        break;
+      case 'HRAttendance':
+        console.log("HRAttendance page loaded");
+        break;
+      case 'AttendanceSheet':
+        console.log("AttendanceSheet page loaded");
+        break;
+      case 'ProjectList':
+        console.log("ProjectList page loaded");
+        break;
+      case 'f1':
+        console.log("f1 page loaded");
+        break;
+      case 'f2':
+        console.log("f2 page loaded");
+        break;
+      case 'f3':
+        console.log("f3 page loaded");
+        break;
+      case 'f4':
+        console.log("f4 page loaded");
+        break;
+      case 'f5':
+        console.log("f5 page loaded");
+        break;
+      case 'Reward':
+        console.log("Reward page loaded");
+        break;
+      case 'recognize':
+        console.log("recognize page loaded");
+        break;
+      case 'recent':
+        console.log("recent page loaded");
+        break;
+      case 'rewards':
+        console.log("rewards page loaded");
+        break;
+      case 'leaderboard':
+        console.log("leaderboard page loaded");
+        break;
+      case 'estimates':
+        console.log("Estimates page loaded");
+        loadEstimates();
+        break;
+      case 'vacancies_review':
+        console.log("vacancies_review page loaded");
+        loadVacanciesForReview();
+        break;
+      case 'application_review':
+        console.log("application_review page loaded");
+        break;
+      case 'vacancies_reviewp':
+        console.log("vacancies_reviewp page loaded");
+        loadVacanciesForPhone();
+        break;
+      case 'vacancies_reviewf':
+        console.log("vacancies_reviewf page loaded");
+        loadVacanciesForFace();
+        break;
+      case 'Performance':
+        console.log("Performance page loaded");
+        break;
+      case 'evidence':
+        console.log("evidence page loaded");
+        break;
+      case 'feedback':
+        console.log("feedback page loaded");;
+        break;
+      case 'Appreciation':
+        console.log("Appreciation page loaded");;
+        break;
+      case 'AddReward':
+        console.log("AddReward page loaded");;
+        break;
+      case 'NewReward':
+        console.log("AddReward page loaded");;
+        break;
+      case 'RedeemShop':
+        console.log("RedeemShop page loaded");;
+        break;
+      case 'detailed-metrics':
+        console.log("detailed-metrics page loaded");
+        createProjectsChart();
+        createSatisfactionChart();
+        break;
+      case 'vacancies_reviewr':
+      console.log("vacancies_reviewr page loaded");
+      loadVacanciesForReference();
+      break;
+      case 'phone_review':
+        console.log("phone_review page loaded");
+        const selectedVacancyPosition = sessionStorage.getItem('selectedVacancyPosition');
+        if (selectedVacancyPosition) {
+          loadCandidatesForPhoneScreen(selectedVacancyPosition);
+        } else {
+          console.error('No selected vacancy position in session storage');
+        }
+      break;
+      case 'face':
+        console.log("face page loaded");
+        const selectedFaceVacancyPosition = sessionStorage.getItem('selectedVacancyPosition');
+        if (selectedFaceVacancyPosition) {
+            loadCandidatesForFaceToFace(selectedFaceVacancyPosition);
+        } else {
+            console.error('No selected vacancy position in session storage');
+        }
+      case 'vacancy_detail':
+        if (id !== null) {
+          loadVacancyDetail(id);
+        } else {
+          console.error('No ID provided for vacancy detail');
+        }
+        break;
+      case 'candidates_detail':
+          if (id !== null) {
+            loadCandidateDetails(id);
+          } else {
+            console.error('No ID provided for candidate detail');
+          }
+          break;
+      case 'reference':
+          console.log("reference page loaded");
+          const selectedRefVacancyPosition = sessionStorage.getItem('selectedVacancyPosition');
+          if (selectedRefVacancyPosition) {
+            loadCandidatesForReference(selectedRefVacancyPosition);
+          } else {
+            console.error('No selected vacancy position in session storage');
+          }
+          break;
+      case 'reference_review':
+          console.log("reference_review page loaded");
+          break;
+      default:
+        console.error("Unknown page name:", pageName);
+    }
+  }).withFailureHandler(function(error) {
+    console.error("Error loading page content:", error);
+  }).getPageContent(pageName);
+}
+
+
+     function openJobsPage() {
+    google.script.run.withSuccessHandler(function(html) {
+      document.getElementById('content').innerHTML = html;
+      highlightSidebar('jobinfo');
+      setupJobInfoPage();
+      openJobInfoPage('jobinfo'); // Automatically load jobinfo
+    }).withFailureHandler(function(error) {
+      console.error('Error fetching jobs page content: ' + error);
+      alert('Failed to load jobs page content. Please try again later.');
+    }).getJobsPageContent();
+  }
+
+  function highlightSidebar(pageName) {
+    const links = document.querySelectorAll('.sidebar a');
+    links.forEach(link => {
+      link.classList.remove('active');
+    });
+
+    const activeLink = document.querySelector(`.sidebar a[data-page="${pageName}"]`);
+    if (activeLink) {
+      activeLink.classList.add('active');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    openPage('dashboard'); // Load the dashboard initially
+
+    const links = document.querySelectorAll('.sidebar a');
+    links.forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const pageName = this.getAttribute('data-page');
+        if (pageName === 'jobinfo') {
+          openJobsPage();
+        } else {
+          openPage(pageName);
+        }
+      });
+    });
+  });
+
+  function setupJobInfoPage() {
+    const jobInfoLinks = document.querySelectorAll('.job-info a');
+    jobInfoLinks.forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const pageName = this.getAttribute('data-page');
+        openJobInfoPage(pageName);
+      });
+    });
+  }
+
+  function openJobInfoPage(page) {
+    const currentForm = document.querySelector('#job-content form');
+    if (currentForm) {
+      saveFormData(currentForm.id);
+    }
+    google.script.run.withSuccessHandler(function(html) {
+      document.getElementById('job-content').innerHTML = html;
+      highlightJobInfoSidebar(page);
+      const newForm = document.querySelector('#job-content form');
+      if (newForm) {
+        loadFormData(newForm.id);
+      } else {
+        console.warn(`Form for ${page} not found.`);
+      }
+    }).withFailureHandler(function(error) {
+      console.error('Error fetching job info page content: ' + error);
+      alert('Failed to load job info page content. Please try again later.');
+    }).getJobInfoPageContent(page);
+  }
+
+  function saveFormData(formId) {
+    const form = document.getElementById(formId);
+    const formData = new FormData(form);
+    for (let [key, value] of formData.entries()) {
+      if (form.elements[key].type === 'checkbox') {
+        localStorage.setItem(formId + '-' + key, form.elements[key].checked);
+      } else {
+        localStorage.setItem(formId + '-' + key, value);
+      }
+    }
+  }
+
+  function loadFormData(formId) {
+    const form = document.getElementById(formId);
+    Array.from(form.elements).forEach(element => {
+      if (element.name) {
+        const savedValue = localStorage.getItem(formId + '-' + element.name);
+        if (element.type === 'checkbox') {
+          element.checked = (savedValue === 'true');
+        } else if (savedValue) {
+          element.value = savedValue;
+        }
+      }
+    });
+  }
+    function updateJobBoards() {
+    var postingOptions = document.getElementById('postingOptions').value;
+    var jobBoards = document.getElementById('jobBoards');
+    jobBoards.innerHTML = ''; // Clear current options
+
+    var options = {
+      internal: [
+        'Employee Referral',
+        'Internal Newsletter'
+      ],
+      external: [
+        'Social Media',
+        'LinkedIn',
+        'Recruitment Agency',
+        'University'
+      ],
+      both: [
+        'Employee Referral',
+        'Internal Newsletter',
+        'Social Media',
+        'LinkedIn',
+        'Recruitment Agency',
+        'University'
+      ]
+    };
+
+    var selectedOptions = options[postingOptions] || [];
+    for (var i = 0; i < selectedOptions.length; i++) {
+      var label = document.createElement('label');
+      var checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.value = selectedOptions[i];
+      checkbox.name = 'jobBoards';
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(selectedOptions[i]));
+      jobBoards.appendChild(label);
+    }
+
+    restoreCheckboxStates('jobPostsForm');
+  }
+
+  function restoreCheckboxStates(formId) {
+    const form = document.getElementById(formId);
+    Array.from(form.elements).forEach(element => {
+      if (element.type === 'checkbox') {
+        const savedValue = localStorage.getItem(formId + '-' + element.value);
+        element.checked = (savedValue === 'true');
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector('#job-content form');
+    if (form) {
+      loadFormData(form.id);
+      if (form.id === 'jobPostsForm') {
+        updateJobBoards();
+      }
+    }
+  })
+
+  function highlightJobInfoSidebar(pageName) {
+    const jobInfoLinks = document.querySelectorAll('.job-info a');
+    jobInfoLinks.forEach(link => {
+      link.classList.remove('active');
+    });
+
+    const activeJobInfoLink = document.querySelector(`.job-info a[data-page="${pageName}"]`);
+    if (activeJobInfoLink) {
+      activeJobInfoLink.classList.add('active');
+    }
+  }
+
+    function loadVacancies() {
+      console.log('Loading vacancies...');
+      google.script.run.withSuccessHandler(function(vacancies) {
+        console.log('Vacancies loaded:', vacancies);
+        allVacancies = vacancies;
+        populateFilterOptions(vacancies);
+        displayVacancies(vacancies);
+
+        // Adding event listeners after the content is loaded
+        document.getElementById('filter-position').addEventListener('change', filterAndSortVacancies);
+        document.getElementById('sort-progress').addEventListener('change', filterAndSortVacancies);
+        document.getElementById('filter-approval').addEventListener('change', filterAndSortVacancies);
+      }).getVacancies();
+    }
+
+    function populateFilterOptions(vacancies) {
+      const positions = [...new Set(vacancies.map(vacancy => vacancy.position))];
+      const filterPosition = document.getElementById('filter-position');
+      filterPosition.innerHTML = '<option value="">All Positions</option>';
+      positions.forEach(position => {
+        const option = document.createElement('option');
+        option.value = position;
+        option.textContent = position;
+        filterPosition.appendChild(option);
+      });
+    }
+
+    function filterAndSortVacancies() {
+      console.log('Filtering and sorting vacancies...');
+      let filteredVacancies = allVacancies;
+
+      const filterPosition = document.getElementById('filter-position').value;
+      console.log('Selected filter position:', filterPosition);
+      if (filterPosition) {
+        filteredVacancies = filteredVacancies.filter(vacancy => vacancy.position === filterPosition);
+      }
+
+      const filterApproval = document.getElementById('filter-approval').value;
+      console.log('Selected filter approval:', filterApproval);
+      if (filterApproval) {
+        filteredVacancies = filteredVacancies.filter(vacancy => String(vacancy.approval) === filterApproval);
+      }
+
+      const sortProgress = document.getElementById('sort-progress').value;
+      console.log('Selected sort order:', sortProgress);
+      if (sortProgress) {
+        filteredVacancies.sort((a, b) => {
+          if (sortProgress === 'asc') {
+            return a.progress - b.progress;
+          } else {
+            return b.progress - a.progress;
+          }
+        });
+      }
+
+      console.log('Filtered and sorted vacancies:', filteredVacancies);
+      displayVacancies(filteredVacancies);
+    }
+
+    function displayVacancies(vacancies) {
+      const vacanciesContainer = document.getElementById('vacancies-container');
+      vacanciesContainer.innerHTML = '';
+
+      vacancies.forEach((vacancy, index) => {
+        const vacancyDiv = document.createElement('div');
+        vacancyDiv.className = 'stat';
+        vacancyDiv.setAttribute('onclick', `openPage('vacancy_detail', ${index})`);
+        vacancyDiv.innerHTML = `
+          <h2>${vacancy.count}</h2>
+          <p>${vacancy.position}</p>
+          <div class="progress-circle">${vacancy.progress}%</div>
+        `;
+        vacanciesContainer.appendChild(vacancyDiv);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadVacancies);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    console.log('Vacancy ID from URL:', id);
+    if (id) {
+      loadVacancyDetail(id);
+    } else {
+      console.error('No ID provided in URL');
+    }
+  });
+
+  function loadVacancyDetail(id) {
+    if (id === null) {
+      console.error('ID is not defined');
+      return;
+    }
+    google.script.run.withSuccessHandler(function(vacancy) {
+      if (!vacancy) {
+        console.error('No vacancy found for ID:', id);
+        return;
+      }
+      document.getElementById('position').textContent = vacancy.position;
+      document.getElementById('id').textContent = vacancy.id;
+      document.getElementById('count').textContent = vacancy.count;
+      document.getElementById('progress').textContent = vacancy.progress;
+      document.getElementById('summary').textContent = vacancy.summary;
+      document.getElementById('skills').textContent = vacancy.skills;
+      document.getElementById('department').textContent = vacancy.department;
+      document.getElementById('approval').textContent = vacancy.approval ? "Approved" : "Pending";
+
+      if (vacancy.approvalImage === "PENDING") {
+        document.getElementById('approvalImage').style.display = "none";
+        document.getElementById('pdfPlaceholder').style.display = "block";
+      } else {
+        document.getElementById('approvalImage').src = vacancy.approvalImage;
+        document.getElementById('approvalImage').style.display = "block";
+        document.getElementById('pdfPlaceholder').style.display = "none";
+      }
+    }).getVacancyById(id);
+  }
+
+     //Application Review
+
+    //application_review
+
+    let vacanciesReviewAllVacancies = [];
+
+    function loadVacanciesForReview() {
+      console.log('Loading vacancies...');
+      google.script.run.withSuccessHandler(function(vacancies) {
+        console.log('Vacancies loaded:', vacancies);
+        vacanciesReviewAllVacancies = vacancies;
+        
+        // Debug each vacancy's progress
+        vacancies.forEach(vacancy => {
+          console.log(`Vacancy position: ${vacancy.position}, Progress: ${vacancy.progress}, Type of progress: ${typeof vacancy.progress}`);
+        });
+
+        // Ensure progress is an integer before comparing
+        const filteredVacancies = vacancies.filter(vacancy => {
+          const progressValue = parseInt(vacancy.progress, 10);
+          console.log(`Parsed progress value: ${progressValue}, for vacancy: ${vacancy.position}`);
+          return progressValue === 30;
+        });
+        console.log('Filtered vacancies:', filteredVacancies);
+        displayVacanciesForReview(filteredVacancies);
+      }).getVacancies();
+    }
+
+    function displayVacanciesForReview(vacancies) {
+      const vacanciesContainer = document.getElementById('vacancies-review-container');
+      console.log('Vacancies container:', vacanciesContainer);
+      vacanciesContainer.innerHTML = '';
+
+      if (vacancies.length === 0) {
+        vacanciesContainer.innerHTML = '<p>No vacancies with progress 30 found.</p>';
+        console.log('No vacancies with progress 30 found.');
+        return;
+      }
+
+      vacancies.forEach((vacancy) => {
+        const vacancyDiv = document.createElement('div');
+        vacancyDiv.className = 'vacancies-review-stat';
+        vacancyDiv.setAttribute('onclick', "openPage('application_review')");
+        vacancyDiv.innerHTML = `
+          <h2>${vacancy.count}</h2>
+          <p>${vacancy.position}</p>
+          <div class="vacancies-review-progress-circle">${vacancy.progress}%</div>
+        `;
+        console.log('Appending vacancy:', vacancy);
+        vacanciesContainer.appendChild(vacancyDiv);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('vacancies_review page loaded');
+      loadVacanciesForReview();
+    });
+
+    function toggleFeedbackSidebar() {
+      const sidebar = document.getElementById('feedbackSidebar');
+      sidebar.classList.toggle('active');
+    }
+
+    function submitFeedback() {
+      const feedback = document.querySelector('.feedback-content textarea').value;
+      console.log('Submitting feedback:', feedback);
+      // Logic to handle feedback submission
+      toggleFeedbackSidebar(); // Close the sidebar after submission
+    }
+
+    function handleReview(status) {
+      console.log('Handling review status:', status);
+      // Logic to handle the review status
+    }
+
+    //phone_review
+    // Load vacancies for phone review
+    function loadVacanciesForPhone() {
+      console.log('Loading vacancies...');
+      google.script.run.withSuccessHandler(function(vacancies) {
+        console.log('Vacancies loaded:', vacancies);
+        vacanciesReviewAllVacancies = vacancies;
+
+        // Debug each vacancy's progress
+        vacancies.forEach(vacancy => {
+          console.log(`Vacancy position: ${vacancy.position}, Progress: ${vacancy.progress}, Type of progress: ${typeof vacancy.progress}`);
+        });
+
+        // Ensure progress is an integer before comparing
+        const filteredVacancies = vacancies.filter(vacancy => {
+          const progressValue = parseInt(vacancy.progress, 10);
+          console.log(`Parsed progress value: ${progressValue}, for vacancy: ${vacancy.position}`);
+          return progressValue === 50;
+        });
+        console.log('Filtered vacancies:', filteredVacancies);
+        displayVacanciesForPhone(filteredVacancies);
+      }).getVacancies();
+    }
+
+    // Display vacancies for phone review with index
+    function displayVacanciesForPhone(vacancies) {
+      const vacanciesContainer = document.getElementById('vacancies-review-container');
+      vacanciesContainer.innerHTML = '';
+
+      if (vacancies.length === 0) {
+        vacanciesContainer.innerHTML = '<p>No vacancies with progress 50 found.</p>';
+        console.log('No vacancies with progress 50 found.');
+        return;
+      }
+
+      vacancies.forEach((vacancy, index) => {
+        const vacancyDiv = document.createElement('div');
+        vacancyDiv.className = 'vacancies-review-stat';
+        vacancyDiv.setAttribute('onclick', `selectVacancyAndOpenPage('phone_review', ${index}, '${vacancy.position}')`);
+        vacancyDiv.innerHTML = `
+          <h2>${vacancy.count}</h2>
+          <p>${vacancy.position}</p>
+          <div class="vacancies-review-progress-circle">${vacancy.progress}%</div>
+        `;
+        vacanciesContainer.appendChild(vacancyDiv);
+      });
+    }
+
+// Store the selected vacancy position in session storage and open the phone review page
+    function selectVacancyAndOpenPage(pageName, index, position) {
+      console.log(`Selecting vacancy: ${position}, index: ${index}`);
+      sessionStorage.setItem('selectedVacancyPosition', position);
+      openPage(pageName, index);
+    }
+
+    // Load candidates for phone screen based on selected vacancy position
+    function loadCandidatesForPhoneScreen(vacancyPosition) {
+      console.log('Loading candidates for:', vacancyPosition);
+      google.script.run.withSuccessHandler(function(candidates) {
+        console.log('Candidates loaded:', candidates);
+
+        const filteredCandidates = candidates.filter(candidate => candidate.position.toLowerCase().trim() === vacancyPosition.toLowerCase().trim());
+        console.log('Filtered candidates:', filteredCandidates);
+        displayCandidatesForPhoneScreen(filteredCandidates);
+      }).getCandidatesData();
+    }
+
+    function displayCandidatesForPhoneScreen(candidates) {
+      const candidatesList = document.getElementById('candidates-list');
+      candidatesList.innerHTML = '';
+
+      if (candidates.length === 0) {
+        candidatesList.innerHTML = '<tr><td colspan="5">No candidates found for this position.</td></tr>';
+        console.log('No candidates found for this position.');
+        return;
+      }
+
+      candidates.forEach(candidate => {
+        const candidateRow = document.createElement('tr');
+        candidateRow.innerHTML = `
+          <td>
+            <label class="phone-review-custom-checkbox">
+              <input type="checkbox" class="candidate-checkbox" onchange="toggleCandidateSelection(this)">
+              <span class="phone-review-checkmark"></span>
+            </label>
+          </td>
+          <td>${candidate.name}</td>
+          <td>${candidate.email}</td>
+          <td>${candidate.phone}</td>
+          <td>
+            <select class="phone-review-status-select" onchange="updateCandidateStatus('${candidate.name}', this.value)">
+              <option value="pending">Pending</option>
+              <option value="pass">Pass</option>
+              <option value="fail">Fail</option>
+            </select>
+          </td>
+        `;
+        candidatesList.appendChild(candidateRow);
+      });
+    }
+
+    function toggleSelectAll(selectAllCheckbox) {
+      const checkboxes = document.querySelectorAll('.candidate-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAllCheckbox.checked;
+        toggleCandidateSelection(checkbox);
+      });
+    }
+
+    function toggleCandidateSelection(checkbox) {
+      const candidateRow = checkbox.closest('tr');
+      candidateRow.classList.toggle('selected', checkbox.checked);
+    }
+
+    function showSidebar() {
+      document.getElementById('sidebar').style.display = 'flex';
+    }
+
+    function hideSidebar() {
+      document.getElementById('sidebar').style.display = 'none';
+    }
+
+    function confirmMeetingDetails() {
+      // Select candidates from both tables
+      const faceSelectedCandidates = document.querySelectorAll('.face-review-candidates-table tr.selected');
+      const phoneSelectedCandidates = document.querySelectorAll('.phone-review-candidates-table tr.selected');
+      
+      // Combine the NodeList into a single array
+      const selectedCandidates = [...faceSelectedCandidates, ...phoneSelectedCandidates];
+      
+      if (selectedCandidates.length === 0) {
+          alert('No candidates selected.');
+          return;
+      }
+
+      const emails = Array.from(selectedCandidates).map(candidate => {
+          const email = candidate.querySelector('td:nth-child(3)').textContent;
+          return email;
+      });
+
+      const meetingDate = document.getElementById('meetingDate').value;
+      const meetingStartTime = document.getElementById('meetingStartTime').value;
+      const meetingEndTime = document.getElementById('meetingEndTime').value;
+      const meetingLocation = document.getElementById('meetingLocation').value;
+      const meetingDescription = document.getElementById('meetingDescription').value;
+
+      if (!meetingDate || !meetingStartTime || !meetingEndTime || !meetingLocation || !meetingDescription) {
+          alert('Please fill in all meeting details.');
+          return;
+      }
+
+      google.script.run.withSuccessHandler(function() {
+          const subject = encodeURIComponent('Interview Invitation');
+          const body = encodeURIComponent(`Dear Candidate,\n\nYou are invited to attend an interview on ${meetingDate} from ${meetingStartTime} to ${meetingEndTime}.\n\nLocation: ${meetingLocation}\n\n${meetingDescription}\n\nBest regards,\nYour Company`);
+          const mailtoLink = `mailto:${emails.join(',')}?subject=${subject}&body=${body}`;
+          window.location.href = mailtoLink;
+      }).saveMeetingDetails(meetingDate, meetingStartTime, meetingEndTime, meetingLocation, meetingDescription);
+
+      hideSidebar();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const selectedVacancyPosition = sessionStorage.getItem('selectedVacancyPosition');
+      console.log('Selected Vacancy Position:', selectedVacancyPosition);
+      if (selectedVacancyPosition) {
+        loadCandidatesForFaceToFace(selectedVacancyPosition);
+      } else {
+        console.error('No selected vacancy position in session storage');
+      }
+    });
+    
+  //FacetoFace
+    function loadVacanciesForFace() {
+      console.log('Loading vacancies...');
+      google.script.run.withSuccessHandler(function(vacancies) {
+        console.log('Vacancies loaded:', vacancies);
+        vacanciesReviewAllVacancies = vacancies;
+        
+        // Debug each vacancy's progress
+        vacancies.forEach(vacancy => {
+          console.log(`Vacancy position: ${vacancy.position}, Progress: ${vacancy.progress}, Type of progress: ${typeof vacancy.progress}`);
+        });
+
+        // Ensure progress is an integer before comparing
+        const filteredVacancies = vacancies.filter(vacancy => {
+          const progressValue = parseInt(vacancy.progress, 10);
+          console.log(`Parsed progress value: ${progressValue}, for vacancy: ${vacancy.position}`);
+          return progressValue === 70;
+        });
+        console.log('Filtered vacancies:', filteredVacancies);
+        displayVacanciesForFace(filteredVacancies);
+      }).getVacancies();
+    }
+
+    function displayVacanciesForFace(vacancies) {
+      const vacanciesContainer = document.getElementById('vacancies-review-container');
+      console.log('Vacancies container:', vacanciesContainer);
+      vacanciesContainer.innerHTML = '';
+
+      if (vacancies.length === 0) {
+        vacanciesContainer.innerHTML = '<p>No vacancies with progress 70 found.</p>';
+        console.log('No vacancies with progress 70 found.');
+        return;
+      }
+
+      vacancies.forEach((vacancy, index) => {
+        const vacancyDiv = document.createElement('div');
+        vacancyDiv.className = 'vacancies-review-stat';
+        vacancyDiv.setAttribute('onclick', `selectVacancyAndOpenPage('face', ${index}, '${vacancy.position}')`);
+        vacancyDiv.innerHTML = `
+          <h2>${vacancy.count}</h2>
+          <p>${vacancy.position}</p>
+          <div class="vacancies-review-progress-circle">${vacancy.progress}%</div>
+        `;
+        console.log('Appending vacancy:', vacancy);
+        vacanciesContainer.appendChild(vacancyDiv);
+      });
+    }
+
+    function selectVacancyAndOpenPage(pageName, index, position) {
+      sessionStorage.setItem('selectedVacancyPosition', position);
+      openPage(pageName, index);
+    }
+
+    function loadCandidatesForFaceToFace(vacancyPosition) {
+      console.log('Loading candidates for:', vacancyPosition);
+      google.script.run.withSuccessHandler(function(candidates) {
+        console.log('Candidates loaded:', candidates);
+
+        // Ensure candidate data includes position and status
+        candidates.forEach(candidate => {
+          console.log('Candidate:', candidate.name, 'Position:', candidate.position, 'Status:', candidate.status);
+        });
+
+        // Filter candidates based on vacancy position and status "Pass"
+        const filteredCandidates = candidates.filter(candidate => candidate.position === vacancyPosition && candidate.status === 'Pass');
+        console.log('Filtered candidates:', filteredCandidates);
+        displayCandidatesForFaceToFace(filteredCandidates);
+      }).getCandidatesData();
+    }
+
+    function displayCandidatesForFaceToFace(candidates) {
+      const candidatesList = document.getElementById('candidates-list');
+      candidatesList.innerHTML = '';
+
+      if (candidates.length === 0) {
+        candidatesList.innerHTML = '<tr><td colspan="5">No candidates found for this position.</td></tr>';
+        console.log('No candidates found for this position.');
+        return;
+      }
+
+      candidates.forEach(candidate => {
+        const candidateRow = document.createElement('tr');
+        candidateRow.innerHTML = `
+          <td>
+            <label class="face-review-custom-checkbox">
+              <input type="checkbox" class="candidate-checkbox" onchange="toggleCandidateSelection(this)">
+              <span class="face-review-checkmark"></span>
+            </label>
+          </td>
+          <td>${candidate.name}</td>
+          <td>${candidate.email}</td>
+          <td>${candidate.phone}</td>
+          <td>
+            <select class="face-review-status-select" onchange="updateCandidateStatus('${candidate.name}', this.value)">
+              <option value="pending">Pending</option>
+              <option value="pass">Pass</option>
+              <option value="fail">Fail</option>
+            </select>
+          </td>
+        `;
+        candidatesList.appendChild(candidateRow);
+      });
+    }
+
+    function toggleCandidateSelection(checkbox) {
+      const candidateRow = checkbox.closest('tr');
+      candidateRow.classList.toggle('selected', checkbox.checked);
+    }
+
+    function toggleSelectAll(selectAllCheckbox) {
+      const checkboxes = document.querySelectorAll('.candidate-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAllCheckbox.checked;
+        toggleCandidateSelection(checkbox);
+      });
+    }
+
+    function updateCandidateStatus(candidateName, status) {
+      console.log('Updating status for:', candidateName, 'to', status);
+      // Logic to update the candidate status in the backend or display a confirmation
+    }
+
+    function showSidebar() {
+      const selectedCandidates = document.querySelectorAll('.candidate-checkbox:checked');
+      console.log('Selected candidates:', selectedCandidates); // Debugging line
+      if (selectedCandidates.length === 0) {
+        alert('No candidates selected.');
+        return;
+      }
+      document.getElementById('sidebar').style.display = 'flex';
+    }
+
+    function hideSidebar() {
+      document.getElementById('sidebar').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const selectedVacancyPosition = sessionStorage.getItem('selectedVacancyPosition');
+      console.log('Selected Vacancy Position:', selectedVacancyPosition);
+      if (selectedVacancyPosition) {
+        loadCandidatesForFaceToFace(selectedVacancyPosition);
+      } else {
+        console.error('No selected vacancy position in session storage');
+      }
+    });
+
+    //Reference
+    function loadVacanciesForReference() {
+      console.log('Loading vacancies...');
+      google.script.run.withSuccessHandler(function(vacancies) {
+        console.log('Vacancies loaded:', vacancies);
+        vacanciesReviewAllVacancies = vacancies;
+        
+        // Debug each vacancy's progress
+        vacancies.forEach(vacancy => {
+          console.log(`Vacancy position: ${vacancy.position}, Progress: ${vacancy.progress}, Type of progress: ${typeof vacancy.progress}`);
+        });
+
+        // Ensure progress is an integer before comparing
+        const filteredVacancies = vacancies.filter(vacancy => {
+          const progressValue = parseInt(vacancy.progress, 10);
+          console.log(`Parsed progress value: ${progressValue}, for vacancy: ${vacancy.position}`);
+          return progressValue === 80;
+        });
+        console.log('Filtered vacancies:', filteredVacancies);
+        displayVacanciesForReference(filteredVacancies);
+      }).getVacancies();
+    }
+
+    function displayVacanciesForReference(vacancies) {
+      const vacanciesContainer = document.getElementById('vacancies-review-container');
+      vacanciesContainer.innerHTML = '';
+
+      if (vacancies.length === 0) {
+        vacanciesContainer.innerHTML = '<p>No vacancies with progress 80 found.</p>';
+        console.log('No vacancies with progress 80 found.');
+        return;
+      }
+
+      vacancies.forEach((vacancy, index) => {
+        const vacancyDiv = document.createElement('div');
+        vacancyDiv.className = 'vacancies-review-stat';
+        vacancyDiv.setAttribute('onclick', `selectVacancyAndOpenPage('reference', ${index}, '${vacancy.position}')`);
+        vacancyDiv.innerHTML = `
+          <h2>${vacancy.count}</h2>
+          <p>${vacancy.position}</p>
+          <div class="vacancies-review-progress-circle">${vacancy.progress}%</div>
+        `;
+        vacanciesContainer.appendChild(vacancyDiv);
+      });
+    }
+
+    function loadCandidatesForReference(vacancyPosition) {
+      console.log('Loading candidates for:', vacancyPosition);
+      google.script.run.withSuccessHandler(function(candidates) {
+        console.log('Candidates loaded:', candidates);
+
+        const filteredCandidates = candidates.filter(candidate => candidate.position.toLowerCase().trim() === vacancyPosition.toLowerCase().trim());
+        console.log('Filtered candidates:', filteredCandidates);
+        displayCandidatesForReference(filteredCandidates);
+      }).getCandidatesData();
+    }
+
+    function displayCandidatesForReference(candidates) {
+      const candidatesList = document.getElementById('candidates-list');
+      candidatesList.innerHTML = '';
+
+      if (candidates.length === 0) {
+        candidatesList.innerHTML = '<tr><td colspan="5">No candidates found for this position.</td></tr>';
+        console.log('No candidates found for this position.');
+        return;
+      }
+
+      candidates.forEach(candidate => {
+        const candidateRow = document.createElement('tr');
+        candidateRow.innerHTML = `
+          <td>
+            <label class="reference-check-custom-checkbox">
+              <input type="checkbox" class="candidate-checkbox" onchange="toggleCandidateSelection(this)">
+              <span class="reference-check-checkmark"></span>
+            </label>
+          </td>
+          <td>${candidate.name}</td>
+          <td>${candidate.email}</td>
+          <td>${candidate.phone}</td>
+          <td>
+            <select class="reference-check-status-select" onchange="updateCandidateStatus('${candidate.name}', this.value)">
+              <option value="pending">Pending</option>
+              <option value="pass">Pass</option>
+              <option value="fail">Fail</option>
+            </select>
+          </td>
+        `;
+        candidatesList.appendChild(candidateRow);
+      });
+    }
+
+    function toggleCandidateSelection(checkbox) {
+      const candidateRow = checkbox.closest('tr');
+      candidateRow.classList.toggle('selected', checkbox.checked);
+    }
+
+    function toggleSelectAll(selectAllCheckbox) {
+      const checkboxes = document.querySelectorAll('.candidate-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAllCheckbox.checked;
+        toggleCandidateSelection(checkbox);
+      });
+    }
+
+    function checkSelectedCandidates() {
+      const selectedCandidates = document.querySelectorAll('.reference-check-candidates-table tr.selected');
+      if (selectedCandidates.length === 0) {
+        alert('No candidates selected.');
+        return;
+      }
+
+      // Logic to handle selected candidates (e.g., redirect to another page)
+      // For demonstration, we'll just log the selected candidates
+      const candidateNames = Array.from(selectedCandidates).map(candidate => candidate.querySelector('td:nth-child(2)').textContent);
+      console.log('Selected candidates:', candidateNames);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const selectedVacancyPosition = sessionStorage.getItem('selectedVacancyPosition');
+      console.log('Selected Vacancy Position:', selectedVacancyPosition);
+      if (selectedVacancyPosition) {
+        loadCandidatesForReference(selectedVacancyPosition);
+      } else {
+        console.error('No selected vacancy position in session storage');
+      }
+    });
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const sidebarButton = document.querySelector('.toggle-sidebar-button');
+      sidebar.classList.toggle('active');
+
+      if (sidebar.classList.contains('active')) {
+        sidebarButton.textContent = 'Hide Validity Check';
+      } else {
+        sidebarButton.textContent = 'Show Validity Check';
+      }
+    }
+
+    //Candidates
+    function loadCandidates() {
+      google.script.run.withSuccessHandler(function(candidates) {
+        console.log("Candidates data:", candidates); // Log the candidates data
+        allCandidates = candidates; // Store all candidates data
+        populateJobTitleFilter(candidates); // Populate job title filter
+        displayCandidates(candidates); // Display all candidates initially
+
+        // Add event listeners after the content is loaded
+        document.getElementById('search-input').addEventListener('input', filterCandidates);
+        document.getElementById('filter-job-title').addEventListener('change', filterCandidates);
+      }).withFailureHandler(function(error) {
+        console.error("Error loading candidates data:", error);
+      }).getCandidatesData();
+    }
+
+    function populateJobTitleFilter(candidates) {
+      const jobTitles = [...new Set(candidates.map(candidate => candidate.position))];
+      const filterJobTitle = document.getElementById('filter-job-title');
+      filterJobTitle.innerHTML = '<option value="">All Job Titles</option>';
+      jobTitles.forEach(title => {
+        const option = document.createElement('option');
+        option.value = title;
+        option.textContent = title;
+        filterJobTitle.appendChild(option);
+      });
+    }
+
+    function filterCandidates() {
+      const searchInput = document.getElementById('search-input').value.toLowerCase();
+      const filterJobTitle = document.getElementById('filter-job-title').value;
+
+      let filteredCandidates = allCandidates;
+
+      if (searchInput) {
+        filteredCandidates = filteredCandidates.filter(candidate => 
+          candidate.name.toLowerCase().includes(searchInput) || 
+          candidate.position.toLowerCase().includes(searchInput)
+        );
+      }
+
+      if (filterJobTitle) {
+        filteredCandidates = filteredCandidates.filter(candidate => candidate.position === filterJobTitle);
+      }
+
+      displayCandidates(filteredCandidates);
+    }
+
+    function displayCandidates(candidates) {
+      const candidatesList = document.getElementById('vacancies-candidates-list');
+      candidatesList.innerHTML = ''; // Clear the existing content
+      candidates.forEach(function(candidate, index) {
+        const candidateDiv = document.createElement('div');
+        candidateDiv.className = 'vacancies-candidate';
+        candidateDiv.innerHTML = `
+          <img src="${candidate.imageUrl}" alt="${candidate.name}">
+          <h3>${candidate.name}</h3>
+          <p>${candidate.position}</p>
+        `;
+        candidateDiv.addEventListener('click', function() {
+          openPage('candidates_detail', index);
+        });
+        candidatesList.appendChild(candidateDiv);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCandidates);
+
+function loadCandidateDetails(id) {
+  console.log("Loading candidate details for ID:", id);
+  google.script.run.withSuccessHandler(function(candidate) {
+    if (candidate) {
+      renderCandidateDetails(candidate);
+    } else {
+      console.error('No candidate found for ID:', id);
+    }
+  }).withFailureHandler(function(error) {
+    console.error("Error loading candidate details:", error);
+  }).getCandidateDetails(id + 1); 
+}
+
+ function renderCandidateDetails(candidate) {
+      if (!candidate) {
+        console.error('Candidate data is null or undefined');
+        return;
+      }
+      console.log('Rendering candidate details:', candidate);
+      document.getElementById('candidate-image').src = candidate.imageUrl || '';
+      document.getElementById('candidate-name').textContent = candidate.name || 'N/A';
+        document.getElementById('candidate-email').textContent = `Email: ${candidate.email || 'N/A'}`;
+      document.getElementById('candidate-phone').textContent = `Phone: ${candidate.phone || 'N/A'}`;
+      document.getElementById('candidate-position').textContent = candidate.position || 'N/A';
+      document.getElementById('candidate-resume').href = candidate.resume || '#';
+    }
+
+  function addSearchEventListener() {
+    var searchInput = document.querySelector('.vacancies-candidates .vacancies-search-bar input');
+    searchInput.addEventListener('input', function() {
+      var searchTerm = searchInput.value.toLowerCase();
+      var filteredCandidates = allCandidates.filter(function(candidate) {
+        return candidate.name.toLowerCase().includes(searchTerm) ||
+              candidate.position.toLowerCase().includes(searchTerm);
+      });
+      displayCandidates(filteredCandidates);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    fetchDepartmentManagers();
+  });
+
+  function fetchDepartmentManagers() {
+    google.script.run.withSuccessHandler(function(departmentManagers) {
+      window.departmentManagers = departmentManagers;
+    }).getDepartmentManagers();
+  }
+
+  function updateReportingManager() {
+    const departmentSelect = document.getElementById('department');
+    const selectedDepartment = departmentSelect.value;
+
+    if (selectedDepartment === "Web Development") {
+      handleWebDevelopment();
+    } else if (selectedDepartment === "Marketing") {
+      handleMarketing();
+    } else if (selectedDepartment === "App Development") {
+      handleAppDevelopment();
+    } else if (selectedDepartment === "Support") {
+      handleSupport();
+    } else if (selectedDepartment === "Accounts") {
+      handleAccounts();
+    }
+  }
+
+  function handleWebDevelopment() {
+    console.log("Web Development selected");
+    const reportingManagerInput = document.getElementById('reportingManager');
+    reportingManagerInput.value = window.departmentManagers["Web Development"];
+  }
+
+  function handleMarketing() {
+    console.log("Marketing selected");
+    const reportingManagerInput = document.getElementById('reportingManager');
+    reportingManagerInput.value = window.departmentManagers["Marketing"];
+  }
+
+  function handleAppDevelopment() {
+    console.log("App Development selected");
+    const reportingManagerInput = document.getElementById('reportingManager');
+    reportingManagerInput.value = window.departmentManagers["App Development"];
+  }
+
+  function handleSupport() {
+    console.log("Support selected");
+    const reportingManagerInput = document.getElementById('reportingManager');
+    reportingManagerInput.value = window.departmentManagers["Support"];
+  }
+
+  function handleAccounts() {
+    const reportingManagerInput = document.getElementById('reportingManager');
+    reportingManagerInput.value = window.departmentManagers["Accounts"];
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded. Fetching job details...');
+    fetchJobDetails();
+  });
+
+  function fetchJobDetails() {
+    console.log('Calling google.script.run.getJobDetails...');
+    google.script.run.withSuccessHandler(function(jobDetails) {
+      console.log('Job Details fetched successfully:', jobDetails);
+      if (Object.keys(jobDetails).length === 0) {
+        console.warn('No job details found.');
+      }
+      window.jobDetails = jobDetails;
+      populateJobTitles();
+    }).withFailureHandler(function(error) {
+      console.error('Error fetching job details:', error);
+    }).getJobDetails();
+  }
+
+  function populateJobTitles() {
+    const jobTitleSelect = document.getElementById('jobTitle');
+    jobTitleSelect.innerHTML = '<option value="">Select Job Title</option>';
+    if (window.jobDetails && Object.keys(window.jobDetails).length > 0) {
+      console.log('Populating job titles...');
+      for (const title in window.jobDetails) {
+        const option = document.createElement('option');
+        option.value = title;
+        option.textContent = title;
+        jobTitleSelect.appendChild(option);
+      }
+      console.log('Job titles populated.');
+      updateJobDetails();
+    } else {
+      console.warn('No job details to populate.');
+    }
+  }
+
+  function updateJobDetails() {
+    const jobTitleSelect = document.getElementById('jobTitle');
+    const selectedJobTitle = jobTitleSelect.value;
+    console.log('Selected Job Title:', selectedJobTitle);
+
+    if (window.jobDetails && selectedJobTitle in window.jobDetails) {
+      const jobDescriptionTextarea = document.getElementById('jobDescription');
+      const qualificationsTextarea = document.getElementById('qualifications');
+      const jobInfo = window.jobDetails[selectedJobTitle];
+      
+      jobDescriptionTextarea.value = jobInfo.description;
+      qualificationsTextarea.value = jobInfo.skills;
+      document.getElementById('formattedJobDescription').textContent = jobInfo.description;
+      document.getElementById('formattedQualifications').textContent = jobInfo.skills;
+
+      console.log('Job details updated for:', selectedJobTitle);
+    } else {
+      document.getElementById('jobDescription').value = '';
+      document.getElementById('qualifications').value = '';
+      document.getElementById('formattedJobDescription').textContent = '';
+      document.getElementById('formattedQualifications').textContent = '';
+
+      console.warn('No details found for selected job title:', selectedJobTitle);
+    }
+  }
+
+  function formatText(sourceId, targetId) {
+    const sourceElement = document.getElementById(sourceId);
+    const targetElement = document.getElementById(targetId);
+    targetElement.textContent = sourceElement.value;
+  }
+
+
+  let stageCount = 1;
+
+  function addInterviewStage() {
+    const container = document.getElementById('interviewStagesContainer');
+    const template = document.getElementById('interviewStageTemplate');
+    const newStage = template.cloneNode(true);
+    stageCount++;
+    
+    // Update new stage ID and title
+    newStage.id = `interviewStage${stageCount}`;
+    newStage.querySelector('h2').innerText = `Interview Stage ${stageCount}`;
+
+    // Update all child elements with new IDs and names
+    newStage.querySelectorAll('select, textarea, input').forEach((el) => {
+      el.name = `${el.name}${stageCount}`;
+      el.id = `${el.id}${stageCount}`;
+      el.value = '';  // Clear the value for new stage
+    });
+
+    container.appendChild(newStage);
+  }
+
+  function isSectionFilled(sectionId) {
+    var value = document.getElementById(sectionId).value;
+    return value && value.trim() !== '';
+  }
+
+  function checkAndSubmit() {
+    // Get the form data from jobinfo.html
+    const jobTitle = localStorage.getItem('jobInfoForm-jobTitle');
+    const positionsAvailable = localStorage.getItem('jobInfoForm-positionsAvailable');
+    const jobDescription = localStorage.getItem('jobInfoForm-jobDescription');
+    const department = localStorage.getItem('jobInfoForm-department');
+    const jobSkills = localStorage.getItem('jobInfoForm-qualifications');
+
+    // Check if all fields are filled
+    if (!jobTitle || !department || !jobDescription || !positionsAvailable || !jobSkills) {
+      alert('Please fill all required fields in the Job Information Form.');
+      return;
+    }
+
+    // Call Google Apps Script to append data to the spreadsheet
+    google.script.run.withSuccessHandler(function() {
+      alert('Job data has been submitted successfully.');
+
+      // Clear localStorage
+      localStorage.removeItem('jobInfoForm-jobTitle');
+      localStorage.removeItem('jobInfoForm-department');
+      localStorage.removeItem('jobInfoForm-qualifications');
+      localStorage.removeItem('jobInfoForm-jobDescription');
+      localStorage.removeItem('jobInfoForm-positionsAvailable');
+
+      // Clear the form fields in jobinfo.html
+      clearForm('jobInfoForm');
+      clearForm('jobPostsForm');
+      clearForm('scorecardForm');
+      clearForm('interviewPlanForm');
+      clearForm('hiringTeamForm');
+    }).appendJobData(jobTitle, department, jobDescription, jobSkills, positionsAvailable);
+  }
+
+    function clearForm(formId) {
+      const form = document.getElementById(formId);
+      if (form) {
+        Array.from(form.elements).forEach(element => {
+          if (element.type === 'text' || element.type === 'textarea' || element.type === 'number' || element.type === 'select-one') {
+            element.value = '';
+          } else if (element.type === 'checkbox' || element.type === 'radio') {
+            element.checked = false;
+          }
+        });
+      }
+    }
+
+    function loadEstimates() {
+     console.log("Loading estimates...");
+     google.script.run.withSuccessHandler(function(estimates) {
+       renderEstimates(estimates);
+     }).withFailureHandler(function(error) {
+       onsole.error("Error loading estimates:", error);
+     }).getEstimatesData();
+    }
+
+    function renderEstimates(estimates) {
+      const tbody = document.getElementById('estimates-table-body');
+      tbody.innerHTML = '';
+      estimates.forEach(estimate => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${estimate.number}</td>
+          <td>${estimate.client}</td>
+          <td>${estimate.by}</td>
+          <td>${estimate.date}</td>
+          <td>${estimate.expiry}</td>
+          <td>${estimate.amount}</td>
+          <td>
+            <div class="status">
+              <span class="dot ${estimate.status.toLowerCase()}"></span>
+              ${estimate.status}
+            </div>
+          </td>
+          <td>...</td>
+        `;
+        tbody.appendChild(row);
+     });
+    }
+
+    function loadEmployeeSalary() {
+      google.script.run.withSuccessHandler(function(data) {
+      renderEmployeeSalary(data.employees);
+      updateSalarySummary(data.summary);
+      }).getEmployeeSalaryData();
+    }
+
+    function renderEmployeeSalary(employees) {
+    const tbody = document.getElementById('employee-salary-body');
+    if (!tbody) {
+      console.error("Element with id 'employee-salary-body' not found.");
+      return;
+    }
+    tbody.innerHTML = '';
+    employees.forEach(employee => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${employee.id}</td>
+        <td>${employee.joiningDate}</td>
+        <td>${employee.name}</td>
+        <td>${employee.designation}</td>
+        <td>${employee.email}</td>
+        <td>${employee.phone}</td>
+        <td>${employee.salary}</td>
+        <td>${employee.bonus}</td>
+        <td><button class="generate-slip">Generate Slip</button></td>
+      `;
+      tbody.appendChild(row);
+    });
+    }
+
+  function filterEmployeeSalary() {
+   const searchTerm = document.getElementById('search').value.toLowerCase();
+   google.script.run.withSuccessHandler(function(data) {
+    const filteredEmployees = data.employees.filter(employee => 
+      employee.name.toLowerCase().includes(searchTerm) ||
+      employee.designation.toLowerCase().includes(searchTerm) ||
+      employee.email.toLowerCase().includes(searchTerm)
+    );
+    renderEmployeeSalary(filteredEmployees);
+   }).getEmployeeSalaryData();
+  }
+    
+    function updateSalarySummary(summary) {
+      document.getElementById('average-salary').textContent = `$${summary.averageSalary} / year`;
+      document.getElementById('base-salary-percentage').textContent = `${summary.baseSalaryPercentage}%`;
+      document.getElementById('bonus-percentage').textContent = `${summary.bonusPercentage}%`;
+      document.getElementById('profit-sharing-percentage').textContent = `${summary.profitSharingPercentage}%`;
+      document.getElementById('total-pay-percentage').textContent = `${summary.totalPayPercentage}%`;
+    }
+
+    function filterAndSortVacancies() {
+      console.log('Filtering and sorting vacancies...');
+      let filteredVacancies = allVacancies;
+
+      const filterPosition = document.getElementById('filter-position').value;
+      console.log('Selected filter position:', filterPosition);
+      if (filterPosition) {
+        filteredVacancies = filteredVacancies.filter(vacancy => vacancy.position === filterPosition);
+      }
+
+      const sortProgress = document.getElementById('sort-progress').value;
+      console.log('Selected sort order:', sortProgress);
+      if (sortProgress) {
+        filteredVacancies.sort((a, b) => {
+          if (sortProgress === 'asc') {
+            return a.progress - b.progress;
+          } else {
+            return b.progress - a.progress;
+          }
+        });
+      }
+
+      console.log('Filtered and sorted vacancies:', filteredVacancies);
+      displayVacancies(filteredVacancies);
+    }
+
+    function displayVacancies(vacancies) {
+      const vacanciesContainer = document.getElementById('vacancies-container');
+      vacanciesContainer.innerHTML = '';
+
+      vacancies.forEach((vacancy, index) => {
+        const vacancyDiv = document.createElement('div');
+        vacancyDiv.className = 'stat';
+        vacancyDiv.setAttribute('onclick', `openPage('vacancy_detail', ${index})`);
+        vacancyDiv.innerHTML = `
+          <h2>${vacancy.count}</h2>
+          <p>${vacancy.position}</p>
+          <div class="progress-circle">${vacancy.progress}%</div>
+        `;
+        vacanciesContainer.appendChild(vacancyDiv);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    console.log('Vacancy ID from URL:', id);
+    if (id) {
+      loadVacancyDetail(id);
+    } else {
+      console.error('No ID provided in URL');
+    }
+  });
+
+  function loadVacancyDetail(id) {
+    if (id === null) {
+      console.error('ID is not defined');
+      return;
+    }
+    google.script.run.withSuccessHandler(function(vacancy) {
+      if (!vacancy) {
+        console.error('No vacancy found for ID:', id);
+        return;
+      }
+      document.getElementById('position').textContent = vacancy.position;
+      document.getElementById('id').textContent = vacancy.id;
+      document.getElementById('count').textContent = vacancy.count;
+      document.getElementById('progress').textContent = vacancy.progress;
+      document.getElementById('summary').textContent = vacancy.summary;
+      document.getElementById('skills').textContent = vacancy.skills;
+      document.getElementById('department').textContent = vacancy.department;
+      document.getElementById('approval').textContent = vacancy.approval ? "Approved" : "Pending";
+
+      if (vacancy.approvalImage === "PENDING") {
+        document.getElementById('approvalImage').style.display = "none";
+        document.getElementById('pdfPlaceholder').style.display = "block";
+      } else {
+        document.getElementById('approvalImage').src = vacancy.approvalImage;
+        document.getElementById('approvalImage').style.display = "block";
+        document.getElementById('pdfPlaceholder').style.display = "none";
+      }
+    }).getVacancyById(id);
+  }
+
+  function displayCandidates(candidates) {
+      const candidatesList = document.getElementById('vacancies-candidates-list');
+      candidatesList.innerHTML = ''; // Clear the existing content
+      candidates.forEach(function(candidate, index) {
+        const candidateDiv = document.createElement('div');
+        candidateDiv.className = 'vacancies-candidate';
+        candidateDiv.innerHTML = `
+          <img src="${candidate.imageUrl}" alt="${candidate.name}">
+          <h3>${candidate.name}</h3>
+          <p>${candidate.position}</p>
+        `;
+        candidateDiv.addEventListener('click', function() {
+          openPage('candidates_detail', index);
+        });
+        candidatesList.appendChild(candidateDiv);
+      });
+    }
+
+  function addSearchEventListener() {
+    var searchInput = document.querySelector('.vacancies-candidates .vacancies-search-bar input');
+    searchInput.addEventListener('input', function() {
+      var searchTerm = searchInput.value.toLowerCase();
+      var filteredCandidates = allCandidates.filter(function(candidate) {
+        return candidate.name.toLowerCase().includes(searchTerm) ||
+              candidate.position.toLowerCase().includes(searchTerm);
+      });
+      displayCandidates(filteredCandidates);
+    });
+  }
+
+    function openGmail() {
+      window.open('https://mail.google.com/', '_blank');  // Open Gmail in a new tab
+    }
+
+    function openGoogleMeet() {
+      window.open('https://meet.google.com/', '_blank');  // Open Google Meet in a new tab
+    }
+
+    function openGoogleChat() {
+      window.open('https://chat.google.com/', '_blank');  // Open Google Chat in a new tab
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      openPage('dashboard'); // Load the dashboard initially
+      var dropdown = document.querySelectorAll('.dropdown-btn');
+      dropdown.forEach(function (btn) {
+        btn.addEventListener('click', function (event) {
+          event.preventDefault(); // Prevent default anchor behavior
+          this.classList.toggle('active');
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
+      });
+
+      var profileIcon = document.querySelector('.icon-profile');
+      if (profileIcon) {
+        profileIcon.addEventListener('click', function() {
+          openPage('profile');
+        });
+      }
+    });
+
+    function createWorkingFormatChart() {
+      var ctx = document.getElementById('workingFormatChart').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Remote', 'On site'],
+          datasets: [{
+            label: 'Working Format',
+            data: [60, 40],
+            backgroundColor: ['#4b0082', '#f1f1f1']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+
+    function createProjectEmploymentChart() {
+      var ctx = document.getElementById('projectEmploymentChart').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+          datasets: [{
+            label: 'Project',
+            data: [50, 60, 70, 80, 90, 100],
+            backgroundColor: '#4b0082'
+          }, {
+            label: 'Bench',
+            data: [20, 30, 40, 50, 60, 70],
+            backgroundColor: '#f1f1f1'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+    function createStaffTurnoverChart() {
+      var ctx = document.getElementById('staffTurnoverChart').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+          datasets: [{
+            label: 'Staff Turnover',
+            data: [15, 14, 13, 12, 11, 10, 9, 8, 7],
+            backgroundColor: '#4b0082'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+    
+    function loadExpenses() {
+  console.log("Loading expenses...");
+  google.script.run.withSuccessHandler(function(expenses) {
+    renderExpenses(expenses);
+  }).withFailureHandler(function(error) {
+    console.error("Error loading expenses:", error);
+  }).getExpensesData();
+}
+
+function renderExpenses(expenses) {
+  const tbody = document.getElementById('expense-table-body');
+  tbody.innerHTML = '';
+  expenses.forEach(expense => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${expense.item}</td>
+      <td>${expense.from}</td>
+      <td>${expense.date}</td>
+      <td>${expense.by}</td>
+      <td>${expense.amount}</td>
+      <td>${expense.paidBy}</td>
+      <td>
+        <div class="status">
+          <span class="dot ${expense.status.toLowerCase()}"></span>
+          ${expense.status}
+        </div>
+      </td>
+      <td>...</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+    function createAcceptedChart() {
+      var ctx = document.getElementById('acceptedChart').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Accepted', 'Pending'],
+          datasets: [{
+            label: 'Accepted Job Application',
+            data: [90, 10],
+            backgroundColor: ['#4b0082', '#f1f1f1']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+
+    function createRejectedChart() {
+      var ctx = document.getElementById('rejectedChart').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Rejected', 'Pending'],
+          datasets: [{
+            label: 'Rejected Job Application',
+            data: [90, 10],
+            backgroundColor: ['#e74c3c', '#f1f1f1']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+
+            function createProjectsChart() {
+            var ctx1 = document.getElementById('projectsChart').getContext('2d');
+            var projectsChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Project 1', 'Project 2', 'Project 3', 'Project 4', 'Project 5', 'Project 6'],
+                    datasets: [{
+                        label: 'Completion',
+                        data: [100, 100, 100, 100, 100, 0],
+                        borderColor: '#4e73df',
+                        backgroundColor: 'rgba(78, 115, 223, 0.1)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Projects'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Completion Rate (%)'
+                            },
+                            min: 0,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createSatisfactionChart() {
+            var ctx2 = document.getElementById('satisfactionChart').getContext('2d');
+            var satisfactionChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    datasets: [{
+                        label: 'User Satisfaction',
+                        data: [4.5, 4.6, 4.7, 4.7],
+                        backgroundColor: '#1cc88a',
+                        borderColor: '#1cc88a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Quarter'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Rating (out of 5)'
+                            },
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 0.5
+                            }
+                        }
+                    }
+                }
+            });
+        }
+  </script>

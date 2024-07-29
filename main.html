@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HRM Dashboard</title>
+  <?!= HtmlService.createHtmlOutputFromFile('stylesheet').getContent(); ?>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="left">
+      <div class="title">SYSTEM 101</div>
+    </div>
+    <div class="right">
+      <input type="text" id="search" placeholder="Search...">
+      <div class="icon icon-profile">👤</div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="sidebar">
+      <a href="#" onclick="openPage('dashboard'); return false;"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="#" class="dropdown-btn"><i class="fas fa-cube"></i> Apps <span class="caret">&#9660;</span></a>
+      <div class="dropdown-container">
+        <a href="#" onclick="openGmail(); return false;"><i class="fas fa-envelope"></i> Email</a>
+        <a href="#" onclick="openGoogleChat(); return false;"><i class="fas fa-comments"></i> Chat</a>
+        <a href="#" onclick="openGoogleMeet(); return false;"><i class="fas fa-video"></i> Meet</a>
+      </div>
+
+      <a href="#" onclick="openPage('employee'); return false;"><i class="fas fa-user"></i> Employees</a>
+      <a href="#" onclick="openPage('department'); return false;"><i class="fas fa-building"></i> Department</a>
+
+      <a href="#" class="dropdown-btn"><i class="fas fa-calendar-alt"></i> Leaves <span class="caret">&#9660;</span></a>
+      <div class="dropdown-container">
+        <a href="#" onclick="openPage('abclist'); return false;"><i class="fas fa-user-clock"></i> By Employee</a>
+        <a href="#" onclick="openPage('EmpAddLeave'); return false;"><i class="fas fa-user-plus"></i> Add Leave(Employee)</a>
+        <a href="#" onclick="openPage('HRabclist'); return false;"><i class="fas fa-users"></i> By HR</a>
+        <a href="#" onclick="openPage('HRAddLeave'); return false;"><i class="fas fa-user-plus"></i> Add Leave(HR)</a>
+      </div>
+      <a href="#" class="dropdown-btn"><i class="fas fa-clock"></i> Attendance <span class="caret">&#9660;</span></a>
+      <div class="dropdown-container">
+        <a href="#" onclick="openPage('AttendanceEmployee'); return false;"><i class="fas fa-user-check"></i> Employee</a>
+        <a href="#" onclick="openPage('HRAttendance'); return false;"><i class="fas fa-users-cog"></i> Employees(HR)</a>
+        <a href="#" onclick="openPage('AttendanceSheet'); return false;"><i class="fas fa-list"></i> Attendance Sheet</a>
+      </div>
+      <a href="#" class="dropdown-btn"><i class="fas fa-chart-line"></i> Sales <span class="caret">&#9660;</span></a>
+      <div class="dropdown-container">
+        <a href="#" onclick="openPage('expenses'); return false;"><i class="fas fa-money-bill"></i> Expenses</a>
+        <a href="#" onclick="openPage('estimates'); return false;"><i class="fas fa-file-invoice-dollar"></i> Estimates</a>
+      </div>
+      <a href="#" class="dropdown-btn"><i class="fas fa-money-check-alt"></i> Payroll <span class="caret">&#9660;</span></a>
+      <div class="dropdown-container">
+        <a href="#" onclick="openPage('employeeSalary'); return false;"><i class="fas fa-dollar-sign"></i> Employee Salary</a>
+      </div>
+
+      <a href="#" onclick="openPage('ProjectList'); return false;"><i class="fas fa-project-diagram"></i> Project</a>
+      <a href="#" onclick="openPage('Performance');return false;"><i class="fas fa-chart-bar"></i> Performance</a>
+      <a href="#" onclick="openPage('f1');return false;"><i class="fas fa-comment-dots"></i> Employee Feedback</a>
+      <a href="#" onclick="openPage('Reward');return false;"><i class="fas fa-trophy"></i> Reward Feature</a>
+      <a href="#" onclick="openPage('RedeemShop');return false;"><i class="fas fa-shopping-bag"></i> Redeem Shop</a>
+      <a href="#" onclick="openPage('vacancies'); return false;"><i class="fas fa-briefcase"></i> Vacancies</a>
+      <a href="#" onclick="openPage('candidates'); return false;"><i class="fas fa-users"></i> Candidates</a>
+      <a href="#" onclick="openPage('tasks'); return false;"><i class="fas fa-chalkboard-teacher"></i> Tasks</a>
+    </div>
+    <div class="main">
+      <div id="content">
+        <!-- Dynamic content will be loaded here -->
+      </div>
+    </div>
+  </div>
+  <?!= HtmlService.createHtmlOutputFromFile('javascript').getContent(); ?>
+</body>
+</html>

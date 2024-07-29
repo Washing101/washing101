@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vacancies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Add your styles here */
+  </style>
+</head>
+<body>
+  <div class="vacancies-page">
+    <div class="vacancies-header">
+      <h1>Vacancies</h1>
+      <div class="controls">
+        <a href="#" onclick="openJobsPage(); return false;" id="addJobLink" class="add-button">Add Job</a>
+        <select id="filter-position" class="filter">
+          <option value="">All Positions</option>
+          <!-- Options will be dynamically added -->
+        </select>
+        <select id="sort-progress" class="sort">
+          <option value="">Sort by Progress</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+        <select id="filter-approval" class="filter">
+          <option value="">All</option>
+          <option value="true">Approved</option>
+          <option value="false">Pending</option>
+        </select>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="left-content">
+        <div id="vacancies-container" class="stats-container">
+          <!-- Vacancies will be dynamically loaded here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

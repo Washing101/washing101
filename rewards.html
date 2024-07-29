@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Rewards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container h2 {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 60px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .add-btn {
+            display: inline-block;
+            background: #4e44ce;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .add-btn:hover {
+            background: #3d34aa;
+        }
+        .add-btn i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Manage Rewards</div>
+            <div class="breadcrumb">
+                <a href="#">Dashboard</a> / Manage Rewards
+            </div>
+        </div>
+        <div class="form-container">
+            <h2>Manage Rewards</h2>
+            <section id="manage-rewards" class="section">
+                <ul id="rewardList">
+                    <li>Gift Card</li>
+                    <li>Extra Day Off</li>
+                    <li>Team Lunch</li>
+                    <li>Bonus</li>
+                    <li>Parking Spot</li>
+                </ul>
+            </section>
+            <a href="#" class="add-btn" onclick="openPage('AddReward'); return false;">
+                <i class="fas fa-plus"></i> Add Reward
+            </a>
+            <a href="#" class="add-btn" onclick="openPage('Reward'); return false;">
+                <i class="fas fa-arrow-left"></i> Back to Main
+            </a>
+        </div>
+    </div>
+    <script>
+        function openPage(page) {
+            window.location.href = page + '.html';
+        }
+    </script>
+</body>
+</html>

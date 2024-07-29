@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Performance Overview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container h2 {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-group label {
+            width: 30%;
+            font-weight: bold;
+        }
+        .form-group select, .form-group input, .form-group textarea {
+            width: 65%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+        }
+        .btn-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+        .btn-apply {
+            background-color: #5a2d82;
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #f44336;
+            color: white;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .navigation {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .add-btn {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #4e73df;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .add-btn i {
+            margin-right: 8px;
+        }
+        .add-btn:hover {
+            background-color: #3a5bb0;
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        function openPage(pageName) {
+            window.location.href = pageName + '.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Employee Performance Overview</div>
+            <div class="breadcrumb">
+                <a href="#">Dashboard</a> / Performance Overview
+            </div>
+        </div>
+        <div class="form-container">
+            <h2>Overview</h2>
+            <div class="form-group">
+                <label>Employee Name:</label>
+                <input type="text" value="John Doe" readonly>
+            </div>
+            <div class="form-group">
+                <label>Department:</label>
+                <input type="text" value="IT" readonly>
+            </div>
+            <div class="form-group">
+                <label>Position:</label>
+                <input type="text" value="IT Manager" readonly>
+            </div>
+            <div class="form-group">
+                <label>Overall Performance Score:</label>
+                <input type="text" value="90%" readonly>
+            </div>
+            <div class="form-group">
+                <label>Projects Completed:</label>
+                <input type="text" value="5 out of 6" readonly>
+            </div>
+            <div class="navigation">
+                <a href="#" class="add-btn" onclick="openPage('detailed-metrics'); return false;">
+                    <i class="fas fa-chart-line"></i> View Detailed Metrics
+                </a>
+                <a href="#" class="add-btn" onclick="openPage('evidence'); return false;">
+                    <i class="fas fa-file-alt"></i> View Performance Evidence
+                </a>
+                <a href="#" class="add-btn" onclick="openPage('feedback'); return false;">
+                    <i class="fas fa-comments"></i> View Feedback
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

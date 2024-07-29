@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            width: 23%;
+        }
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+        .leave-balance-icon {
+            background-color: #ff6b6b;
+        }
+        .annual-leave-icon {
+            background-color: #4fc3f7;
+        }
+        .medical-leave-icon {
+            background-color: #ba68c8;
+        }
+        .remaining-leave-icon {
+            background-color: #4db6ac;
+        }
+        .card-info h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .card-info p {
+            margin: 0;
+            color: #777;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table thead {
+            background: #f7f7f7;
+        }
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+        }
+        table th {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+        table tbody tr {
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+        table tbody tr:hover {
+            background: #f7f7f7;
+        }
+        .status {
+            display: flex;
+            align-items: center;
+        }
+        .status .dot {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .action-btns {
+            display: flex;
+            gap: 5px;
+        }
+        .action-btn {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .action-btn i {
+            margin-right: 5px;
+        }
+        .view-btn {
+            background-color: #2196f3;
+        }
+        .edit-btn {
+            background-color: #ffeb3b;
+        }
+        .delete-btn {
+            background-color: #f44336;
+        }
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pagination button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Leave Manage (HR)</div>
+            <div class="breadcrumb">
+                <a href="#">Leaves Manage</a> / Leave Manage (HR)
+            </div>
+        </div>
+        <div class="table-container">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon leave-balance-icon"></div>
+                    <div class="card-info">
+                        <h2>18/60</h2>
+                        <p>Today's Presents Leave</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon annual-leave-icon"></div>
+                    <div class="card-info">
+                        <h2>5</h2>
+                        <p>Today Leaves</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon medical-leave-icon"></div>
+                    <div class="card-info">
+                        <h2>0</h2>
+                        <p>Unplanned Leaves</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon remaining-leave-icon"></div>
+                    <div class="card-info">
+                        <h2>6</h2>
+                        <p>Pending Leaves</p>
+                    </div>
+                </div>
+            </div>
+              <div class="search-bar">
+                <input type="text" placeholder="Search for ..." id="search-input">
+            </div>
+            <a href="#" class="add-btn" onclick="openPage('HRAddLeave'); return false;">
+               <i class="fas fa-plus"></i>Add Leave
+            </a>            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Employee Name</th>
+                        <th>Leave Type</th>
+                        <th>Reason</th>
+                        <th>No Of Days</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01</td>
+                        <td>Willie Torres</td>
+                        <td>Medical Leave</td>
+                        <td>Going to Hospital</td>
+                        <td>02</td>
+                        <td>11 Oct, 2023</td>
+                        <td>12 Oct, 2023</td>
+                        <td><span class="status"><span class="dot" style="background: #28a745;"></span>Approved</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>02</td>
+                        <td>Patricia Garcia</td>
+                        <td>Casual Leave</td>
+                        <td>Going to Family Function</td>
+                        <td>01</td>
+                        <td>07 Sept, 2023</td>
+                        <td>07 Sept, 2023</td>
+                        <td><span class="status"><span class="dot" style="background: #ff9800;"></span>Pending</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>03</td>
+                        <td>Juliette Fecteau</td>
+                        <td>Casual Leave</td>
+                        <td>Going to Holiday</td>
+                        <td>06</td>
+                        <td>11 Jun, 2023</td>
+                        <td>16 Jun, 2023</td>
+                        <td><span class="status"><span class="dot" style="background: #f44336;"></span>Declined</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>04</td>
+                        <td>Thomas Hatfield</td>
+                        <td>Sick Leave</td>
+                        <td>Attend Birthday party</td>
+                        <td>01</td>
+                        <td>15 July, 2023</td>
+                        <td>15 July, 2023</td>
+                        <td><span class="status"><span class="dot" style="background: #28a745;"></span>Approved</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>05</td>
+                        <td>Willie Torres</td>
+                        <td>Sick Leave</td>
+                        <td>Personal</td>
+                        <td>02</td>
+                        <td>19 Aug, 2023</td>
+                        <td>20 Aug, 2023</td>
+                        <td><span class="status"><span class="dot" style="background: #f44336;"></span>Declined</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>06</td>
+                        <td>Juliette Fecteau</td>
+                        <td>Casual Leave</td>
+                        <td>Going to Family Function</td>
+                        <td>01</td>
+                        <td>14 Feb, 2022</td>
+                        <td>14 Feb, 2022</td>
+                        <td><span class="status"><span class="dot" style="background: #28a745;"></span>Approved</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>07</td>
+                        <td>Nancy Reynolds</td>
+                        <td>Medical Leave</td>
+                        <td>Medical Emergency</td>
+                        <td>04</td>
+                        <td>23 Jan, 2023</td>
+                        <td>26 Jan, 2023</td>
+                        <td><span class="status"><span class="dot" style="background: #ff9800;"></span>Pending</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>08</td>
+                        <td>Holly Kavanaugh</td>
+                        <td>Casual Leave</td>
+                        <td>Personal</td>
+                        <td>02</td>
+                        <td>16 Dec, 2023</td>
+                        <td>17 Dec, 2023</td>
+                        <td><span class="status"><span class="dot" style="background: #f44336;"></span>Declined</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>09</td>
+                        <td>Jonas Frederiksen</td>
+                        <td>Casual Leave</td>
+                        <td>Going to Holiday</td>
+                        <td>05</td>
+                        <td>29 Nov, 2023</td>
+                        <td>03 Dec, 2023</td>
+                        <td><span class="status"><span class="dot" style="background: #28a745;"></span>Approved</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Nancy Reynolds</td>
+                        <td>Sick Leave</td>
+                        <td>Going to Hospital</td>
+                        <td>01</td>
+                        <td>15 Oct, 2023</td>
+                        <td>15 Oct, 2023</td>
+                        <td><span class="status"><span class="dot" style="background: #28a745;"></span>Approved</span></td>
+                        <td class="action-btns">
+                            <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <p>Showing 1 to 10 of 17 results</p>
+                <div>
+                    <button>Previous</button>
+                    <button>Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

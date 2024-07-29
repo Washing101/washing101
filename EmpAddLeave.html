@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply Leaves</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container h2 {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-group label {
+            width: 30%;
+            font-weight: bold;
+        }
+        .form-group select, .form-group input, .form-group textarea {
+            width: 65%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+        }
+        .btn-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+        .btn-apply {
+            background-color: #5a2d82;
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #f44336;
+            color: white;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Apply Leaves</div>
+            <div class="breadcrumb">
+                <a href="#">Dashboard</a> / Apply Leaves
+            </div>
+        </div>
+        <div class="form-container">
+            <h2>Apply Leaves</h2>
+            <div class="error-message" id="error-message">Number of leave days cannot exceed remaining leaves.</div>
+            <form id="leaveForm">
+                <div class="form-group">
+                    <label for="leaveType">Leave Type *</label>
+                    <select id="leaveType" required>
+                        <option value="">Select Leave</option>
+                        <option value="workingFromHome">Working From Home</option>
+                        <option value="sickLeave">Sick Leave</option>
+                        <option value="parentalLeave">Parental Leave</option>
+                        <option value="annualLeave">Annual Leave</option>
+                        <option value="normalLeave">Normal Leave</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="remainingLeaves">Remaining Leaves</label>
+                    <input type="text" id="remainingLeaves" value="10" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="fromDate">From</label>
+                    <input type="date" id="fromDate" value="2024-07-20">
+                </div>
+                <div class="form-group">
+                    <label for="toDate">To</label>
+                    <input type="date" id="toDate" value="2024-07-20">
+                </div>
+                <div class="form-group">
+                    <label for="leaveDay">Leave Day *</label>
+                    <select id="leaveDay" required>
+                        <option value="halfDay">Half Day</option>
+                        <option value="fullDay">Full Day</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="numberOfDays">Number of Days Leave</label>
+                    <input type="number" id="numberOfDays" value="2">
+                </div>
+                <div class="form-group">
+                    <label for="reason">Reason</label>
+                    <textarea id="reason" rows="3"></textarea>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn-apply">Apply</button>
+                    <button type="button" class="btn-cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', initializeForm);
+
+        function initializeForm() {
+            // Your form initialization logic here, if any.
+        }
+    </script>
+</body>
+</html>

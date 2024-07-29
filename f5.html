@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis and Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .breadcrumb-container {
+            padding: 20px;
+            background-color: white;
+            border-bottom: 1px solid #ccc;
+        }
+        .breadcrumb-container .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .breadcrumb-container .breadcrumb {
+            color: #666;
+        }
+        .breadcrumb-container .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb-container .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container h2 {
+            margin: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .analysis-summary {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .add-btn {
+            background-color: #5a2d82;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .add-btn i {
+            margin-right: 5px;
+        }
+        .add-btn:hover {
+            background-color: #6b35a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="breadcrumb-container">
+            <div class="title">Analysis and Insights</div>
+            <div class="breadcrumb">
+                <a href="#">Dashboard</a> / Analysis and Insights
+            </div>
+        </div>
+        <div class="form-container">
+            <h2>Analysis and Insights</h2>
+            <div id="analysisSummary" class="analysis-summary">
+                <h3>Analysis Summary</h3>
+                <p>Total Feedback: 5</p>
+                <p>Low Engagement Count: 2</p>
+                <p>High Workload Count: 2</p>
+                <p>Low Satisfaction Count: 2</p>
+                <p>Average Engagement: 5.0</p>
+                <p>Average Workload: 6.0</p>
+                <p>Average Satisfaction: 6.0</p>
+                <p>Standard Deviation of Engagement: 1.58</p>
+                <p>Standard Deviation of Workload: 1.41</p>
+                <p>Standard Deviation of Satisfaction: 1.58</p>
+                <h3>Recommendations</h3>
+                <p>
+                    Employee Alice in HR has a balanced engagement. Suggest maintaining current engagement activities.<br>
+                    Employee Anonymous in Finance has low engagement and high workload. Suggest organizing a team-building activity or a one-on-one coffee chat to discuss their concerns. Consider redistributing tasks or providing additional support.<br>
+                    Employee Charlie in IT has a balanced work environment. Suggest maintaining current work environment.<br>
+                    Employee Anonymous in Marketing has low engagement. Suggest organizing a team-building activity.<br>
+                    Employee Eve in Sales has high satisfaction and balanced workload. Suggest maintaining current job structure.<br>
+                </p>
+            </div>
+            <div class="navigation">
+                <a href="f1.html" class="add-btn" onclick="openPage('f1'); return false;">
+                    <i class="fas fa-plus"></i> Employee Feedback Form
+                </a>
+                <a href="f2.html" class="add-btn" onclick="openPage('f2'); return false;">
+                    <i class="fas fa-plus"></i> Feedback History
+                </a>
+                <a href="f3.html" class="add-btn" onclick="openPage('f3'); return false;">
+                    <i class="fas fa-plus"></i> Admin Dashboard
+                </a>
+                <a href="f4.html" class="add-btn" onclick="openPage('f4'); return false;">
+                    <i class="fas fa-plus"></i> Employee Survey
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

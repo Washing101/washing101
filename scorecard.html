@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scorecard</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-container {
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color: white;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    .form-group textarea {
+      height: 100px;
+    }
+    .form-group select {
+      height: 35px;
+    }
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+    }
+    .formatted-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Scorecard</h1>
+    <div class="form-group">
+      <label for="evaluationCriteria">Evaluation Criteria</label>
+      <textarea id="evaluationCriteria" name="evaluationCriteria"></textarea>
+    </div>
+     <div class="form-group">
+      <label for="ratingScale">Rating Scale</label>
+      <select id="ratingScale" name="ratingScale">
+        <option value="1-5">1-5</option>
+        <option value="1-10">1-10</option>
+        <option value="Excellent to Poor">Excellent to Poor</option>
+        <option value="Outstanding to Needs Improvement">Outstanding to Needs Improvement</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="coreCompetencies">Core Competencies (e.g., Technical Skills, Communication, Teamwork)</label>
+      <textarea id="coreCompetencies" name="coreCompetencies"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="behavioralQuestions">Behavioral Questions and Ratings</label>
+      <textarea id="behavioralQuestions" name="behavioralQuestions"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="culturalFit">Cultural Fit Assessment</label>
+      <textarea id="culturalFit" name="culturalFit"></textarea>
+    </div>
+    <button type="button" class="submit-btn" onclick="openJobInfoPage('interviewplan'); return false;">Next</button>
+  </div>
+  <script>
+
+  </script>
+</body>
+</html>

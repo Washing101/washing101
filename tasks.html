@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+        .tasks-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      background-color: #f4f4f9;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .tasks-container {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .tasks-content {
+      flex: 2;
+      padding-right: 20px;
+      box-sizing: border-box;
+    }
+    .tasks-card {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 25px;
+      transition: transform 0.3s ease;
+    }
+    .tasks-card:hover {
+      transform: translateY(-5px);
+    }
+    .tasks-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+    }
+    .tasks-calendar {
+      flex: 1;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      margin-left: 20px;
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+      box-sizing: border-box;
+    }
+    .calendar-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .calendar-google-icon {
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+    }
+    .calendar-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .calendar-time {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-right: 10px;
+    }
+    .calendar-content {
+      font-size: 14px;
+      color: #555;
+    }
+    .calendar-date {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .calendar-divider {
+      border-left: 3px solid #00aaff;
+      height: 20px;
+      margin-right: 10px;
+    }
+    .calendar-divider-orange {
+      border-left: 3px solid #ffa500;
+      height: 20px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tasks-wrapper">
+    <div class="tasks-container">
+      <div class="tasks-content">
+        <div class="tasks-card" onclick="openPage('vacancies_review'); return false;">
+          <div class="tasks-title">Application Review</div>
+        </div>
+        <div class="tasks-card" onclick="openPage('vacancies_reviewp'); return false;">
+          <div class="tasks-title">Preliminary Phone Screen</div>
+        </div>
+        <div class="tasks-card" onclick="openPage('vacancies_reviewf')">
+          <div class="tasks-title">Face to Face</div>
+        </div>
+        <div class="tasks-card" onclick="openPage('vacancies_reviewr')">
+          <div class="tasks-title">Reference Check</div>
+        </div>
+      </div>
+      <div class="tasks-calendar">
+        <div class="calendar-title">
+          <span>Calendar</span>
+          <img src="https://th.bing.com/th/id/OIP.UEzpbepQbdDXQubx8xrJzgAAAA?rs=1&pid=ImgDetMain" alt="Google Calendar" class="calendar-google-icon" onclick="redirectToGoogleCalendar()">
+        </div>
+        <div class="calendar-date">02 February</div>
+        <div class="calendar-item">
+          <div class="calendar-divider"></div>
+          <div>
+            <div class="calendar-time">09:00</div>
+            <div class="calendar-content">Backend Developer - Application Review</div>
+          </div>
+        </div>
+        <div class="calendar-item">
+          <div class="calendar-divider"></div>
+          <div>
+            <div class="calendar-time">10:00</div>
+            <div class="calendar-content">QA Engineer - Application Review</div>
+          </div>
+        </div>
+        <div class="calendar-date">11 February</div>
+        <div class="calendar-item">
+          <div class="calendar-divider-orange"></div>
+          <div>
+            <div class="calendar-time">09:00</div>
+            <div class="calendar-content">QA Engineer - Send test task</div>
+          </div>
+        </div>
+        <div class="calendar-item">
+          <div class="calendar-divider"></div>
+          <div>
+            <div class="calendar-time">11:00</div>
+            <div class="calendar-content">Back-end Developer - Meeting</div>
+          </div>
+        </div>
+        <div class="calendar-item">
+          <div class="calendar-divider-orange"></div>
+          <div>
+            <div class="calendar-time">13:00</div>
+            <div class="calendar-content">Front-end Developer - Final interview</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+  </script>
+</body>
+</html>

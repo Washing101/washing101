@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Reward</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+        }
+        .message-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 40px;
+            text-align: center;
+        }
+        .message-container h1 {
+            font-size: 2.5em;
+            color: #4e44ce;
+            margin-bottom: 20px;
+        }
+        .message-container p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .message-container .add-btn {
+            display: inline-block;
+            background: #4e44ce;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+            text-align: center;
+        }
+        .message-container .add-btn:hover {
+            background: #3d34aa;
+        }
+        .message-container .add-btn i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="message-container">
+            <h1>Reward Added!</h1>
+            <p>Your new reward has been added successfully.</p>
+            <a href="#" class="add-btn" onclick="openPage('Reward'); return false;">
+                <i class="fas fa-arrow-left"></i> Back to Manage Rewards
+            </a>
+        </div>
+    </div>
+    <script>
+        function openPage(page) {
+            window.location.href = page + '.html';
+        }
+    </script>
+</body>
+</html>

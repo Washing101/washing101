@@ -1,5 +1,6 @@
 ## Hi there 👋
-[GoogleAppScript]([https://docs.google.com/spreadsheets/d/1YXM-Kn756XRxCBd6g12LKEMtB_3y9HTGETNqEvlPfIs/edit?gid=0#gid=0](https://docs.google.com/spreadsheets/d/1YXM-Kn756XRxCBd6g12LKEMtB_3y9HTGETNqEvlPfIs/edit?gid=0#gid=0))
+[GoogleAppScript](https://docs.google.com/spreadsheets/d/1YXM-Kn756XRxCBd6g12LKEMtB_3y9HTGETNqEvlPfIs/edit?gid=0#gid=0)
+
 
 <!--
 **Washing101/washing101** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
